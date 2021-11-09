@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Custom1';
+  src: local('Custom1'),
+      url('../fonts/Lobster/Lobster-Regular.ttf') format('truetype');
+      
+
+
+  font-weight: normal;
+}
