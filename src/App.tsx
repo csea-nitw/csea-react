@@ -1,13 +1,14 @@
 /* eslint-disable import/no-default-export */
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Test } from './pages/test';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        Welcome to <img src="/logo192.png" alt="CSEA logo" width="200px" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -20,6 +21,13 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Test />} />
+          </Routes>
+        </Router>
+      </div>
     </div>
   );
 }
