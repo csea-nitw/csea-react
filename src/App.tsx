@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Test } from './pages/test';
 import './css/font.css';
+import { Quiz } from './pages/quiz';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <header className="App-header">
         Welcome to <img src="/logo192.png" alt="CSEA logo" width="200px" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Solve <code>the Quiz</code> and win prizes.
         </p>
         <a
           className="App-link"
@@ -19,13 +20,14 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Visit CSEA
         </a>
       </header>
       <div>
         <Router>
           <Routes>
             <Route path="/" element={<Test />} />
+            <Route path="/quiz" element={<Quiz />} />
           </Routes>
         </Router>
       </div>
