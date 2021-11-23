@@ -12,9 +12,14 @@ export const quizAvailable = {
     {
       qsMandatory: true,
       qsHint: 'No hints for this question',
-      qsImageUrl: '',
+      qsImageUrl: 'http://source.unsplash.com/random',
       answer: 1,
       options: [
+        {
+          optionUrl: 'http://source.unsplash.com/random',
+          _id: '619771ed10b2a12ef1c7bedb',
+          optionText: 'option A',
+        },
         {
           optionUrl: '',
           _id: '619771ed10b2a12ef1c7bedb',
@@ -22,13 +27,14 @@ export const quizAvailable = {
         },
         {
           optionUrl: '',
-          _id: '619771ed10b2a12ef1c7beda',
-          optionText: 'option B',
+          _id: '619771ed10b2a12ef1c7bedb',
+          optionText: 'option A',
         },
       ],
       _id: '619771ed10b2a12ef1c7bed9',
       qsType: 'single',
-      qsText: 'What is answer?',
+      qsText:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
     {
       qsMandatory: true,

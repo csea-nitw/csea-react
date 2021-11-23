@@ -1,4 +1,5 @@
 import { Button, Grid, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
 import { quizAvailable } from '../constants/sampleQuizData';
@@ -20,7 +21,7 @@ function Quiz() {
       container
       xs={12}
       direction="row"
-      style={{ userSelect: 'none', backgroundColor: 'white', margin: 'auto' }}
+      style={{ userSelect: 'none', backgroundColor: 'white', margin: '35px auto' }}
     >
       {/* pallete thing here */}
       <Grid
@@ -28,20 +29,19 @@ function Quiz() {
         xs={11}
         md={4}
         height="max-content"
-        margin="2vh auto"
+        margin="5vh auto"
         container
         direction="column"
-        border="solid"
-        style={{ backgroundColor: '#5B246C1A', borderRadius: '3vh', padding: '2vh' }}
+        style={{ backgroundColor: '#C4C4C4', borderRadius: '3vh', padding: '2vh' }}
       >
-        <Typography>Quiz Pallete</Typography>
+        <Typography fontWeight={600}>Quiz Pallete</Typography>
         <Grid item container direction="row" style={{ justifyContent: 'space-evenly' }}>
           {quizAvailable.questions.map((item, index) => (
             <Grid
               item
               xs={1.8}
-              border="solid"
               onClick={() => setCurrentQs(index)}
+              mt={1}
               style={{
                 backgroundColor: getColorForPallete(index, selected[index]),
                 borderRadius: '2vh',
@@ -54,7 +54,12 @@ function Quiz() {
         <Grid item container direction="row" justifyContent="space-around" alignItems="center">
           <Grid item xs={4}>
             <Button
-              variant="text"
+              variant="contained"
+              size="small"
+              sx={{
+                padding: '5px',
+                marginTop: '10px',
+              }}
               onClick={() => {
                 setCurrentQs(Math.max(currentQs - 1, 0));
               }}
@@ -64,7 +69,12 @@ function Quiz() {
           </Grid>
           <Grid item xs={4}>
             <Button
-              variant="text"
+              variant="contained"
+              size="small"
+              sx={{
+                padding: '5px',
+                marginTop: '10px',
+              }}
               onClick={() => {
                 const newArr: number[] = [];
                 selected.forEach((selectedOption, index) => {
@@ -82,7 +92,12 @@ function Quiz() {
           </Grid>
           <Grid item xs={4}>
             <Button
-              variant="text"
+              variant="contained"
+              size="small"
+              sx={{
+                padding: '5px',
+                marginTop: '10px',
+              }}
               onClick={() => {
                 setCurrentQs(Math.min(currentQs + 1, quizAvailable.questions.length - 1));
               }}
@@ -94,34 +109,42 @@ function Quiz() {
       </Grid>
 
       {/* main quiz panel will appear here */}
-      <Grid item xs={12} md={6} margin="auto" container direction="column" border="solid">
-        <Typography border="solid">Question {1 + currentQs}</Typography>
+      <Grid item xs={12} md={6} margin="auto" container direction="column">
+        <Typography fontSize={35} fontWeight={600} mb={-1}>
+          Question {1 + currentQs}
+        </Typography>
 
-        <Typography border="solid" maxWidth="100%">
+        <Typography maxWidth="100%">
           Type - {quizAvailable.questions[currentQs].qsType} <DoneIcon />
         </Typography>
         {/* Question */}
         {quizAvailable.questions[currentQs].qsImageUrl !== '' ? (
           <Grid item container direction="row">
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
               <img
                 src={quizAvailable.questions[currentQs].qsImageUrl}
                 alt={`${quizAvailable.questions[currentQs].qsImageUrl}`}
-                style={{ maxWidth: '60%', maxHeight: '20vh', margin: 'auto', padding: '1vh' }}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '30vh',
+                  margin: 'auto',
+                  padding: '1vh',
+                  borderRadius: '15px',
+                }}
               />
             </Grid>
             <Grid
               item
-              md={6}
+              md={8}
               xs={12}
               style={{
                 margin: 'auto',
               }}
             >
-              <Typography border="solid" padding="1vh">
+              <Box padding="1vh" fontWeight={400} mt={1} mb={3} sx={{ width: '100%', border: '' }}>
                 {' '}
                 {quizAvailable.questions[currentQs].qsText}
-              </Typography>
+              </Box>
             </Grid>
           </Grid>
         ) : (
@@ -131,10 +154,10 @@ function Quiz() {
               margin: 'auto',
             }}
           >
-            <Typography border="solid" padding="1vh">
+            <Box padding="1vh" fontWeight={400} mt={1} mb={2} sx={{ width: '100%', border: '' }}>
               {' '}
               {quizAvailable.questions[currentQs].qsText}
-            </Typography>
+            </Box>
           </Grid>
         )}
         {quizAvailable.questions[currentQs].options.map((option, index) => (
@@ -142,8 +165,12 @@ function Quiz() {
             item
             container
             direction="row"
-            border="solid"
-            style={selected[currentQs] === index ? { backgroundColor: '#1AA260' } : {}}
+            sx={{
+              '&:hover': {
+                fontWeight: 'bold !important',
+                cursor: 'pointer',
+              },
+            }}
             onClick={() => {
               const newArr: number[] = [];
               selected.forEach((selectedOption, index2) => {
@@ -165,8 +192,23 @@ function Quiz() {
               margin="auto 0"
               justifyContent="center"
             >
-              <Grid border="solid" margin="auto">
-                <Typography padding="1vh">{1 + index}.</Typography>
+              <Grid
+                sx={{
+                  backgroundColor: '#C4C4C4',
+                  borderRadius: '30px',
+                  '&:hover': {
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                  },
+                }}
+                style={
+                  selected[currentQs] === index
+                    ? { backgroundColor: '#1AA260', fontWeight: 'bold' }
+                    : {}
+                }
+                margin="auto"
+              >
+                {/* <Box padding="1vh">{1 + index}.</Box> */}
               </Grid>
             </Grid>
             {option.optionUrl !== '' ? (
@@ -186,7 +228,22 @@ function Quiz() {
                     margin: 'auto',
                   }}
                 >
-                  <Typography border="solid" textAlign="left" padding="1vh">
+                  <Typography
+                    border="solid"
+                    textAlign="left"
+                    padding="1vh"
+                    sx={{
+                      borderRadius: '30px',
+                      '&:hover': {
+                        color: 'red',
+                      },
+                    }}
+                    style={
+                      selected[currentQs] === index
+                        ? { backgroundColor: '#1AA260', fontWeight: 'bold' }
+                        : {}
+                    }
+                  >
                     {' '}
                     {option.optionText}
                   </Typography>
@@ -199,9 +256,27 @@ function Quiz() {
                 xs={10}
                 style={{
                   margin: 'auto',
+                  borderRadius: '30px',
                 }}
               >
-                <Typography border="solid" textAlign="center" padding="1vh">
+                <Typography
+                  textAlign="center"
+                  padding="1.7vh"
+                  sx={{
+                    backgroundColor: '#C4C4C4',
+                    borderRadius: '30px',
+                    '&:hover': {
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                    },
+                  }}
+                  style={
+                    selected[currentQs] === index
+                      ? { backgroundColor: '#1AA260', fontWeight: 'bold' }
+                      : {}
+                  }
+                  m={1}
+                >
                   {' '}
                   {option.optionText}
                 </Typography>
