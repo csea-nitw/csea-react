@@ -15,11 +15,21 @@ function Test() {
       </Grid>
       <Grid item md={12}>
         <Stack direction="row" spacing={2} justifyContent="center">
-          <Button variant="contained" size="large" disableElevation>
+          <Button
+            variant="contained"
+            size="large"
+            disableElevation
+            style={{ backgroundColor: 'black' }}
+          >
             {' '}
             Log In
           </Button>
-          <Button variant="contained" size="large" disableElevation>
+          <Button
+            variant="contained"
+            size="large"
+            disableElevation
+            style={{ backgroundColor: 'black' }}
+          >
             {' '}
             Sign Up
           </Button>

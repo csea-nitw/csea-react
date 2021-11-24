@@ -26,8 +26,19 @@ function Quiz() {
   };
   // modal
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open1, setOpen1] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
+
+  const handleOpen = () => {
+    console.log('open');
+    setOpen(true);
+  };
+  const handleClose = () => {
+    console.log('Hello world');
+    setOpen(false);
+  };
   const style = {};
   return (
     <Grid
@@ -166,7 +177,7 @@ function Quiz() {
         </Typography>
 
         <Typography fontSize={15} color="gray">
-          Click to Enlarge Images
+          Click on the images to enlarge them
         </Typography>
 
         {/* Question */}
@@ -179,7 +190,7 @@ function Quiz() {
                   alt={`${quizAvailable.questions[currentQs].qsImageUrl}`}
                   style={{
                     height: '150px',
-                    width: '150px',
+                    width: '100%',
                     margin: 'auto',
                     padding: '1vh',
                     borderRadius: '15px',
@@ -203,9 +214,9 @@ function Quiz() {
                     transform: 'translate(-50%, -50%)',
                     width: 600,
                     bgcolor: 'background.paper',
-                    border: '2px solid #000',
                     boxShadow: 24,
                     p: 4,
+                    opacity: '0',
                   }}
                 >
                   <Typography id="modal-modal-title" variant="h6" component="h2">

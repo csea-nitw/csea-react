@@ -21,12 +21,17 @@ export const quizAvailable = {
           optionText: 'option A',
         },
         {
-          optionUrl: '',
+          optionUrl: 'http://source.unsplash.com/random',
           _id: '619771ed10b2a12ef1c7bedb',
           optionText: 'option A',
         },
         {
-          optionUrl: '',
+          optionUrl: 'http://source.unsplash.com/random',
+          _id: '619771ed10b2a12ef1c7bedb',
+          optionText: 'option A',
+        },
+        {
+          optionUrl: 'http://source.unsplash.com/random',
           _id: '619771ed10b2a12ef1c7bedb',
           optionText: 'option A',
         },
