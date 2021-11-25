@@ -2,14 +2,12 @@ import { Button, Grid, Typography, Stack, Card, CardContent } from '@mui/materia
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
-import { useNavigate } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import { quizAvailable } from '../constants/sampleQuizData';
 
 function Quiz() {
   const [currentQs, setCurrentQs] = useState(0);
-  const [startTime, setStartTime] = useState(Date.now() + 10000);
-  const navigate = useNavigate();
+  const [startTime, setStartTime] = useState(Date.now() + 30000);
   const [selected, setSelected] = useState([
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1,
@@ -21,7 +19,8 @@ function Quiz() {
   }
   setInterval(() => {
     if (Date.now() > startTime) {
-      navigate('/result-wait');
+      window.location.href = '/result-wait';
+      clearInterval();
     }
   }, 1000);
   const getColorForPallete = (index: number, selectedOption: number): string => {

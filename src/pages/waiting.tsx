@@ -1,11 +1,13 @@
 import { Grid, Typography, Button } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Countdown from 'react-countdown';
 
 function Waiting() {
   const [startTime, setStartTime] = useState(Date.now() + 5000);
-  const navigate = useNavigate();
+  const [active, setActive] = useState(true);
+  // const navigate = useNavigate();
 
   const localStart = localStorage.getItem('start-time');
   if (localStart) {
@@ -13,7 +15,8 @@ function Waiting() {
   }
   setInterval(() => {
     if (Date.now() > startTime) {
-      navigate('/quiz');
+      setActive(false);
+      // navigate('/quiz');
     }
   }, 100);
   return (
@@ -34,10 +37,12 @@ function Waiting() {
         </Typography>
       </Grid>
       <Grid item md={12} style={{ position: 'relative', top: '-150px', marginTop: '50px' }}>
-        <Button variant="contained" size="large" disableElevation disabled>
-          {' '}
-          Start Quiz
-        </Button>
+        <Link to="/quiz">
+          <Button variant="contained" size="large" disableElevation disabled={active}>
+            {' '}
+            Start Quiz
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   );

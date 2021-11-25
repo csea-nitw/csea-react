@@ -14,10 +14,50 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 function SignUp() {
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [passwordR, setPasswordR] = React.useState('');
+  const [allOk, setAllOk] = React.useState(false);
+  React.useEffect(() => {
+    setAllOk(
+      firstName.length >= 2 &&
+        lastName.length >= 2 &&
+        password.length >= 6 &&
+        email.length !== 0 &&
+        password === passwordR,
+    );
+  }, [firstName, lastName, email, password]);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    alert(firstName + lastName + email + password);
     // eslint-disable-next-line no-console
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 5000);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: 'params.url' }),
+      signal: controller.signal,
+    };
+    fetch('https://insti-web-backend.herokuapp.com/api/page/view', requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('response is not ok');
+        }
+        if (response.status !== 200) {
+          throw new Error('Status code is not 200');
+        }
+        return response.json();
+      })
+      .then((val) => console.log(val))
+      .catch((err) => {
+        console.log(err);
+        window.location.href = '/';
+      })
+      .finally(() => clearTimeout(id));
     console.log({
       email: data.get('email'),
       password: data.get('password'),
@@ -64,6 +104,10 @@ function SignUp() {
                 name="firstName"
                 autoComplete="name"
                 autoFocus
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
               />
               <TextField
                 margin="normal"
@@ -74,6 +118,10 @@ function SignUp() {
                 name="lastName"
                 autoComplete="name"
                 autoFocus
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
               />
               <TextField
                 margin="normal"
@@ -84,6 +132,10 @@ function SignUp() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
               <TextField
                 margin="normal"
@@ -94,6 +146,10 @@ function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
               <TextField
                 margin="normal"
@@ -103,9 +159,18 @@ function SignUp() {
                 label="Confirm Password"
                 type="password"
                 id="confirmPassword"
-                autoComplete="current-password"
+                value={passwordR}
+                onChange={(e) => {
+                  setPasswordR(e.target.value);
+                }}
               />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                disabled={!allOk}
+                sx={{ mt: 3, mb: 2 }}
+              >
                 Create an Account
               </Button>
               <Grid container>
