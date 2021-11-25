@@ -11,9 +11,10 @@ import { SignIn } from './pages/login';
 import { Waiting } from './pages/waiting';
 import { ResultWaiting } from './pages/resultWait';
 import { Result } from './pages/result';
+import { SignUp } from './pages/signup';
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: '#EAEEF3', minHeight: '100vh' }}>
       <Navbar />
       {/* <header className="App-header">
         Welcome to <img src="/logo192.png" alt="CSEA logo" width="200px" />
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<Test />} />
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/login" element={<SignIn />} />
+            <Route path="/register" element={<SignUp />} />
             <Route path="/wait" element={<Waiting />} />
             <Route path="/result-wait" element={<ResultWaiting />} />
             <Route path="/result" element={<Result />} />

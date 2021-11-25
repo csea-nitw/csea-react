@@ -57,6 +57,16 @@ export const quizAvailable = {
           _id: '619771ed10b2a12ef1c7beda',
           optionText: 'option B',
         },
+        {
+          optionUrl: '',
+          _id: '619771ed10b2a12ef1c7beda',
+          optionText: 'option B',
+        },
+        {
+          optionUrl: '',
+          _id: '619771ed10b2a12ef1c7beda',
+          optionText: 'option B',
+        },
       ],
       _id: '619771ed10b2a12ef1c7bed9',
       qsType: 'single',

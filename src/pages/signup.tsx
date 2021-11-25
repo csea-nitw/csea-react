@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography variant="body2" color="text.secondary" align="center" mt={1}>
       {'Copyright © '}
       <Link color="inherit" href="cseanitw.in">
         CSEA
@@ -27,7 +27,7 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-function SignIn() {
+function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,7 +40,7 @@ function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '95vh' }} justifyContent="center">
+      <Grid container component="main" sx={{ height: '100%' }} justifyContent="center">
         <CssBaseline />
 
         <Grid
@@ -66,9 +66,29 @@ function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Register an account
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="first_name"
+                label="First Name"
+                name="firstName"
+                autoComplete="name"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="last_name"
+                label="Last Name"
+                name="lastName"
+                autoComplete="name"
+                autoFocus
+              />
               <TextField
                 margin="normal"
                 required
@@ -89,22 +109,23 @@ function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                id="confirmPassword"
+                autoComplete="current-password"
               />
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign In
+                Create an Account
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
-                    Dont have an account? Sign Up
+                    Already have an account? Log In
                   </Link>
                 </Grid>
               </Grid>
@@ -117,4 +138,4 @@ function SignIn() {
   );
 }
 
-export { SignIn };
+export { SignUp };

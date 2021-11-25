@@ -1,46 +1,8 @@
 import { Grid, Typography, Stack, Box } from '@mui/material';
+import Countdown from 'react-countdown';
 import React, { useState, useEffect } from 'react';
 
 function Timer(prop: Date) {
-  //   const calculateTimeLeft = () => {
-  //     let year = new Date().getFullYear();
-  //     let difference = +new Date(`10/01/${year}`) - +new Date();
-  //     let timeLeft = {};
-
-  //     if (difference > 0) {
-  //       timeLeft = {
-  //         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-  //         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-  //         minutes: Math.floor((difference / 1000 / 60) % 60),
-  //         seconds: Math.floor((difference / 1000) % 60),
-  //       };
-  //     }
-
-  //     const [timeleft, setTimeLeft] = useState(calculateTimeLeft());
-
-  //     useEffect(() => {
-  //       const timer = setTimeout(() => {
-  //         setTimeLeft(calculateTimeLeft());
-  //       }, 1000);
-  //       return () => clearTimeout(timer);
-  //       const timerComponents = [];
-
-  //       Object.keys(timeLeft).forEach((interval) => {
-  //         if (!timeleft[interval]) {
-  //           return;
-  //         }
-
-  //         timerComponents.push(
-  //           <span>
-  //             {timeleft[interval]} {interval}{' '}
-  //           </span>,
-  //         );
-  //       });
-  //     });
-
-  //     return timeLeft;
-  //   };
-
   return (
     <>
       <Stack direction="row" spacing={1} justifyContent="center" mt={2}>
