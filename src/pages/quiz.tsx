@@ -2,16 +2,28 @@ import { Button, Grid, Typography, Stack, Card, CardContent } from '@mui/materia
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
+import { useNavigate } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import { quizAvailable } from '../constants/sampleQuizData';
 
 function Quiz() {
   const [currentQs, setCurrentQs] = useState(0);
+  const [startTime, setStartTime] = useState(Date.now() + 10000);
+  const navigate = useNavigate();
   const [selected, setSelected] = useState([
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1,
   ]);
 
+  const localStart = localStorage.getItem('start-time');
+  if (localStart) {
+    setStartTime(new Date(localStart).getTime);
+  }
+  setInterval(() => {
+    if (Date.now() > startTime) {
+      navigate('/result-wait');
+    }
+  }, 1000);
   const getColorForPallete = (index: number, selectedOption: number): string => {
     if (selectedOption !== -1) return '#1AA260  ';
     if (currentQs === index) return '#f2c215';
@@ -29,7 +41,7 @@ function Quiz() {
         Quiz #123
       </Typography>
       <Typography variant="h6" sx={{ color: 'gray' }} fontWeight={600} m={1}>
-        Time Left: <Countdown date={Date.now() + 100000} />
+        Time Left: <Countdown date={startTime} />
       </Typography>
       <Button variant="outlined" sx={{ margin: '10px' }}>
         Submit Quiz

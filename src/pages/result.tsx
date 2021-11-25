@@ -1,9 +1,5 @@
-import { Grid, Typography, Card, CardContent } from '@mui/material';
-import { Stack } from '@mui/material';
-import { Button } from '@mui/material';
+import { Grid, Typography, Card, CardContent, Button } from '@mui/material';
 import React from 'react';
-import { pi } from '../constants/sampleConstant';
-import { SampleComponent } from '../components/sampleComponent';
 
 function Result() {
   return (

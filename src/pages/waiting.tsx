@@ -1,12 +1,21 @@
-import { Grid, Typography, Stack, Box, ThemeProvider } from '@mui/material';
-import { Button } from '@mui/material';
-import { Card, CardContent } from '@mui/material';
-import React from 'react';
+import { Grid, Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Countdown from 'react-countdown';
 
 function Waiting() {
-  const [hrs, sethrs] = React.useState(0);
+  const [startTime, setStartTime] = useState(Date.now() + 5000);
+  const navigate = useNavigate();
 
+  const localStart = localStorage.getItem('start-time');
+  if (localStart) {
+    setStartTime(new Date(localStart).getTime);
+  }
+  setInterval(() => {
+    if (Date.now() > startTime) {
+      navigate('/quiz');
+    }
+  }, 100);
   return (
     <Grid
       container
@@ -21,7 +30,7 @@ function Waiting() {
         </Typography>
         {/* Timer starts here */}
         <Typography variant="h4" mt={4} style={{ color: 'black' }}>
-          <Countdown date={Date.now() + 10000} />
+          <Countdown date={startTime} />
         </Typography>
       </Grid>
       <Grid item md={12} style={{ position: 'relative', top: '-150px', marginTop: '50px' }}>

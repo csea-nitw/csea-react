@@ -1,11 +1,15 @@
-import { Grid, Typography } from '@mui/material';
-import { Stack } from '@mui/material';
-import { Button } from '@mui/material';
-import React from 'react';
-import { pi } from '../constants/sampleConstant';
-import { SampleComponent } from '../components/sampleComponent';
+import { Grid, Typography, Button, Stack } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Test() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const localAuth = localStorage.getItem('sign-in');
+    if (localAuth) {
+      navigate('/wait');
+    }
+  }, []);
   return (
     <Grid container alignItems="center" justifyContent="center" spacing={2}>
       <Grid item xs={12} mt={5}>
@@ -20,6 +24,9 @@ function Test() {
             size="large"
             disableElevation
             style={{ backgroundColor: 'black' }}
+            onClick={() => {
+              window.location.href = '/login';
+            }}
           >
             {' '}
             Log In
