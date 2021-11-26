@@ -14,7 +14,7 @@ function Test() {
     <Grid container alignItems="center" justifyContent="center" spacing={2}>
       <Grid item xs={12} mt={5}>
         <Typography variant="h2" mt={4}>
-          Welcome to the CSEA Quiz App
+          Welcome to CSEA Quizix!
         </Typography>
       </Grid>
       <Grid item md={12}>

@@ -17,6 +17,7 @@ function SignUp() {
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [phone, setPhone] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordR, setPasswordR] = React.useState('');
   const [allOk, setAllOk] = React.useState(false);
@@ -26,13 +27,14 @@ function SignUp() {
         lastName.length >= 2 &&
         password.length >= 6 &&
         email.length !== 0 &&
+        phone.length === 10 &&
         password === passwordR,
     );
   }, [firstName, lastName, email, password]);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    alert(firstName + lastName + email + password);
+    alert(firstName + lastName + email + phone + password);
     // eslint-disable-next-line no-console
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), 5000);
@@ -135,6 +137,20 @@ function SignUp() {
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="phoneNum"
+                label="Mobile Number"
+                name="phone"
+                type="number"
+                autoFocus
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
                 }}
               />
               <TextField
