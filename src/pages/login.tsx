@@ -18,11 +18,42 @@ const theme = createTheme();
 
 function SignIn() {
   const navigate = useNavigate();
+  const [signIn, setSignIn] = React.useState(false);
+  React.useEffect(() => {
+    if (signIn) {
+      localStorage.setItem('quiz-user', '61a0aa51714f2600234922f0');
+      navigate('/quiz');
+    }
+  }, [signIn]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.setItem('sign-in', 'true');
-    navigate('/quiz');
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 5000);
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+    };
+    fetch(
+      'https://csea-backend.herokuapp.com/api/questions/61a08e68d2595b0023984644',
+      requestOptions,
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('response is not ok');
+        }
+        if (response.status !== 200) {
+          throw new Error('Status code is not 200');
+        }
+        return response.json();
+      })
+      .then((val) => setSignIn(true))
+      .catch((err) => {
+        console.log(err);
+        // window.location.href = '/';
+      })
+      .finally(() => clearTimeout(id));
   };
   return (
     <ThemeProvider theme={theme}>

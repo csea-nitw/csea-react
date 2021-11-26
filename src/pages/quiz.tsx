@@ -3,11 +3,46 @@ import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
 import Countdown from 'react-countdown';
+import { useNavigate } from 'react-router-dom';
 import { quizAvailable } from '../constants/sampleQuizData';
 
 function Quiz() {
+  const user = localStorage.getItem('quiz-user');
   const [currentQs, setCurrentQs] = useState(0);
   const [startTime, setStartTime] = useState(Date.now() + 30000);
+  const [submitted, setSubmitted] = useState(false);
+  const [attempts, setAttempts] = useState(false);
+  const [thisQuiz, setThisQuiz] = useState(quizAvailable);
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    console.log(thisQuiz);
+  }, [thisQuiz]);
+
+  React.useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch('http://localhost:8000/api/attempt/6196910a7abcf523affc1602', requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('response is not ok');
+        }
+        if (response.status !== 200) {
+          throw new Error('Status code is not 200');
+        }
+        return response.json();
+      })
+      .then((val) => {
+        setThisQuiz(val);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        // window.location.href = '/';
+      });
+  }, []);
+
   const [selected, setSelected] = useState([
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1,
@@ -17,10 +52,57 @@ function Quiz() {
   if (localStart) {
     setStartTime(new Date(localStart).getTime);
   }
+
+  const submitQuestion = () => {
+    const localToken = localStorage.getItem('csea-quiz-token');
+    const savedResponse = {
+      participant: localToken,
+      quiz: thisQuiz.quiz_id,
+      responses: [{}],
+    };
+    console.log(savedResponse);
+    thisQuiz.questions.forEach((question, index) => {
+      const ques = {
+        question: question.qsCode,
+        option: selected[index],
+      };
+      savedResponse.responses.push(ques);
+    });
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(savedResponse),
+    };
+    if (submitted) return;
+    //  console.log(savedResponse);
+    fetch('http://localhost:8000/api/response', requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('response is not ok');
+        }
+        if (response.status !== 200) {
+          throw new Error('Status code is not 200');
+        }
+        setSubmitted(true);
+        return response.json();
+      })
+      .then((val) => {
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        // window.location.href = '/';
+      });
+  };
+
   setInterval(() => {
-    if (Date.now() > startTime) {
-      window.location.href = '/result-wait';
-      clearInterval();
+    if (Date.now() > startTime && Date.now() < startTime + 200) {
+      if (!attempts) {
+        setAttempts(true);
+        console.log('Attempt');
+        submitQuestion();
+      }
     }
   }, 1000);
   const getColorForPallete = (index: number, selectedOption: number): string => {
@@ -34,6 +116,13 @@ function Quiz() {
     return 'black';
   };
 
+  React.useEffect(() => {
+    if (submitted) {
+      alert('success-submitted');
+      navigate('/result-wait');
+    }
+  }, [submitted]);
+
   return (
     <>
       <Typography variant="h4" fontWeight={600} m={1}>
@@ -42,7 +131,13 @@ function Quiz() {
       <Typography variant="h6" sx={{ color: 'gray' }} fontWeight={600} m={1}>
         Time Left: <Countdown date={startTime} />
       </Typography>
-      <Button variant="outlined" sx={{ margin: '10px' }}>
+      <Button
+        variant="outlined"
+        sx={{ margin: '10px' }}
+        onClick={() => {
+          submitQuestion();
+        }}
+      >
         Submit Quiz
       </Button>
       <hr style={{ fontSize: '20' }} />
@@ -74,8 +169,9 @@ function Quiz() {
                 Quiz Pallete
               </Typography>
               <Grid item container direction="row" style={{ justifyContent: 'space-evenly' }}>
-                {quizAvailable.questions.map((item, index) => (
+                {thisQuiz.questions.map((item, index) => (
                   <Grid
+                    key={item.qsCode}
                     item
                     xs={1.8}
                     onClick={() => setCurrentQs(index)}
@@ -177,7 +273,7 @@ function Quiz() {
                       marginTop: '10px',
                     }}
                     onClick={() => {
-                      setCurrentQs(Math.min(currentQs + 1, quizAvailable.questions.length - 1));
+                      setCurrentQs(Math.min(currentQs + 1, thisQuiz.questions.length - 1));
                     }}
                   >
                     Next
@@ -197,16 +293,16 @@ function Quiz() {
               </Typography>
 
               <Typography maxWidth="100%">
-                Type - {quizAvailable.questions[currentQs].qsType} <DoneIcon />
+                Type - {thisQuiz.questions[currentQs].qsType} <DoneIcon />
               </Typography>
 
               {/* Question */}
-              {quizAvailable.questions[currentQs].qsImageUrl !== '' ? (
+              {thisQuiz.questions[currentQs].qsImageUrl !== '' ? (
                 <Grid item container direction="row">
                   <Grid item md={4} xs={12}>
                     <img
-                      src={quizAvailable.questions[currentQs].qsImageUrl}
-                      alt={`${quizAvailable.questions[currentQs].qsImageUrl}`}
+                      src={thisQuiz.questions[currentQs].qsImageUrl}
+                      alt={`${thisQuiz.questions[currentQs].qsImageUrl}`}
                       style={{
                         height: '150px',
                         margin: 'auto',
@@ -232,7 +328,7 @@ function Quiz() {
                       sx={{ width: '100%', border: '' }}
                     >
                       {' '}
-                      {quizAvailable.questions[currentQs].qsText}
+                      {thisQuiz.questions[currentQs].qsText}
                     </Box>
                   </Grid>
                 </Grid>
@@ -251,7 +347,7 @@ function Quiz() {
                     sx={{ width: '100%', border: '' }}
                   >
                     {' '}
-                    {quizAvailable.questions[currentQs].qsText}
+                    {thisQuiz.questions[currentQs].qsText}
                   </Box>
                 </Grid>
               )}
@@ -266,7 +362,7 @@ function Quiz() {
                 alignItems="center"
                 spacing={2}
               >
-                {quizAvailable.questions[currentQs].options.map((option, index) => (
+                {thisQuiz.questions[currentQs].options.map((option, index) => (
                   <Grid
                     container
                     item

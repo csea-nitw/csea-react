@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -21,6 +22,8 @@ function SignUp() {
   const [password, setPassword] = React.useState('');
   const [passwordR, setPasswordR] = React.useState('');
   const [allOk, setAllOk] = React.useState(false);
+  const [userId, setUserId] = React.useState('');
+  const navigate = useNavigate();
   React.useEffect(() => {
     setAllOk(
       firstName.length >= 2 &&
@@ -31,20 +34,40 @@ function SignUp() {
         password === passwordR,
     );
   }, [firstName, lastName, email, password]);
+
+  React.useEffect(() => {
+    const checkAlreadySigned = localStorage.getItem('csea-quiz-token');
+    console.log(checkAlreadySigned);
+    if (checkAlreadySigned) {
+      navigate('/wait');
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (userId) {
+      // console.log(userId);
+      localStorage.setItem('csea-quiz-token', userId);
+      navigate('/wait');
+    }
+  }, [userId]);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    alert(firstName + lastName + email + phone + password);
+    // alert(firstName + lastName + email + phone + password);
     // eslint-disable-next-line no-console
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), 5000);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: 'params.url' }),
+      body: JSON.stringify({
+        email,
+        name: firstName,
+        mobile_no: phone,
+        password,
+      }),
       signal: controller.signal,
     };
-    fetch('https://insti-web-backend.herokuapp.com/api/page/view', requestOptions)
+    fetch('http://localhost:8000/api/signup', requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error('response is not ok');
@@ -54,16 +77,12 @@ function SignUp() {
         }
         return response.json();
       })
-      .then((val) => console.log(val))
+      .then((val) => setUserId(val.id))
       .catch((err) => {
         console.log(err);
-        window.location.href = '/';
+        // window.location.href = '/';
       })
       .finally(() => clearTimeout(id));
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
   };
 
   return (
