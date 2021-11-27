@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/csea-nitw/csea-react/static/css/main.540f527c.chunk.css",
-    "main.js": "/csea-nitw/csea-react/static/js/main.c5dfef7e.chunk.js",
-    "main.js.map": "/csea-nitw/csea-react/static/js/main.c5dfef7e.chunk.js.map",
-    "runtime-main.js": "/csea-nitw/csea-react/static/js/runtime-main.6751abef.js",
-    "runtime-main.js.map": "/csea-nitw/csea-react/static/js/runtime-main.6751abef.js.map",
-    "static/js/2.25385e0a.chunk.js": "/csea-nitw/csea-react/static/js/2.25385e0a.chunk.js",
-    "static/js/2.25385e0a.chunk.js.map": "/csea-nitw/csea-react/static/js/2.25385e0a.chunk.js.map",
-    "static/js/3.0e4a9b23.chunk.js": "/csea-nitw/csea-react/static/js/3.0e4a9b23.chunk.js",
-    "static/js/3.0e4a9b23.chunk.js.map": "/csea-nitw/csea-react/static/js/3.0e4a9b23.chunk.js.map",
+    "main.css": "/csea-nitw/csea-react/static/css/main.bda955f7.chunk.css",
+    "main.js": "/csea-nitw/csea-react/static/js/main.abfa15cd.chunk.js",
+    "main.js.map": "/csea-nitw/csea-react/static/js/main.abfa15cd.chunk.js.map",
+    "runtime-main.js": "/csea-nitw/csea-react/static/js/runtime-main.2641bd45.js",
+    "runtime-main.js.map": "/csea-nitw/csea-react/static/js/runtime-main.2641bd45.js.map",
+    "static/js/2.0f9386c2.chunk.js": "/csea-nitw/csea-react/static/js/2.0f9386c2.chunk.js",
+    "static/js/2.0f9386c2.chunk.js.map": "/csea-nitw/csea-react/static/js/2.0f9386c2.chunk.js.map",
+    "static/js/3.c6ed8e3e.chunk.js": "/csea-nitw/csea-react/static/js/3.c6ed8e3e.chunk.js",
+    "static/js/3.c6ed8e3e.chunk.js.map": "/csea-nitw/csea-react/static/js/3.c6ed8e3e.chunk.js.map",
     "index.html": "/csea-nitw/csea-react/index.html",
-    "static/css/main.540f527c.chunk.css.map": "/csea-nitw/csea-react/static/css/main.540f527c.chunk.css.map",
+    "static/css/main.bda955f7.chunk.css.map": "/csea-nitw/csea-react/static/css/main.bda955f7.chunk.css.map",
     "static/media/font.css": "/csea-nitw/csea-react/static/media/Lobster-Regular.9535d77e.ttf",
     "static/media/csealogo-QUIZIX.b2f33a82.png": "/csea-nitw/csea-react/static/media/csealogo-QUIZIX.b2f33a82.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6751abef.js",
-    "static/js/2.25385e0a.chunk.js",
-    "static/css/main.540f527c.chunk.css",
-    "static/js/main.c5dfef7e.chunk.js"
+    "static/js/runtime-main.2641bd45.js",
+    "static/js/2.0f9386c2.chunk.js",
+    "static/css/main.bda955f7.chunk.css",
+    "static/js/main.abfa15cd.chunk.js"
   ]
 }
