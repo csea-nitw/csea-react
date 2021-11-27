@@ -37,7 +37,7 @@ function SignUp() {
 
   React.useEffect(() => {
     const checkAlreadySigned = localStorage.getItem('csea-quiz-token');
-    console.log(checkAlreadySigned);
+    // console.log(checkAlreadySigned);
     if (checkAlreadySigned) {
       navigate('/wait');
     }
@@ -67,7 +67,7 @@ function SignUp() {
       }),
       signal: controller.signal,
     };
-    fetch('http://localhost:8000/api/signup', requestOptions)
+    fetch('https://csea-backend.herokuapp.com/api/signup', requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error('response is not ok');
@@ -176,8 +176,21 @@ function SignUp() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="confirmPassword"
                 label="Password"
+                type="password"
+                id="confirmPassword"
+                value={passwordR}
+                onChange={(e) => {
+                  setPasswordR(e.target.value);
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Confirm Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -186,19 +199,7 @@ function SignUp() {
                   setPassword(e.target.value);
                 }}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                id="confirmPassword"
-                value={passwordR}
-                onChange={(e) => {
-                  setPasswordR(e.target.value);
-                }}
-              />
+
               <Button
                 type="submit"
                 fullWidth

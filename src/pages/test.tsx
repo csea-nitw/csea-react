@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function Test() {
   const navigate = useNavigate();
   useEffect(() => {
-    const localAuth = localStorage.getItem('sign-in');
+    const localAuth = localStorage.getItem('csea-quiz-token');
     if (localAuth) {
       navigate('/wait');
     }

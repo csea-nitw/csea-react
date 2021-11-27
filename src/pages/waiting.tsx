@@ -1,14 +1,19 @@
 import { Grid, Typography, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Countdown from 'react-countdown';
 
 function Waiting() {
-  const [startTime, setStartTime] = useState(Date.now() + 5000);
+  const [startTime, setStartTime] = useState(1638029000000);
   const [active, setActive] = useState(true);
-  // const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    const localAuth = localStorage.getItem('csea-quiz-token');
+    if (!localAuth) {
+      navigate('/register');
+    }
+  }, []);
   const localStart = localStorage.getItem('start-time');
   if (localStart) {
     setStartTime(new Date(localStart).getTime);

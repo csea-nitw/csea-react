@@ -1,6 +1,7 @@
 {
   "name": "csea-react",
   "version": "0.1.0",
+  "homepage": "https://csea-nitw.github.io/csea-react/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.5.0",
@@ -9,6 +10,7 @@
     "@mui/material": "^5.1.0",
     "@mui/system": "^5.1.1",
     "autoprefixer": "^9",
+    "gh-pages": "^3.2.3",
     "postcss": "^7",
     "react": "^17.0.2",
     "react-countdown": "^2.3.2",
@@ -51,7 +53,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
