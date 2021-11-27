@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/csea-react/static/css/main.3dd75ce5.chunk.css",
-    "main.js": "/csea-react/static/js/main.04d01b28.chunk.js",
-    "main.js.map": "/csea-react/static/js/main.04d01b28.chunk.js.map",
+    "main.js": "/csea-react/static/js/main.37a0caa4.chunk.js",
+    "main.js.map": "/csea-react/static/js/main.37a0caa4.chunk.js.map",
     "runtime-main.js": "/csea-react/static/js/runtime-main.d55c99d7.js",
     "runtime-main.js.map": "/csea-react/static/js/runtime-main.d55c99d7.js.map",
     "static/js/2.1f3ab948.chunk.js": "/csea-react/static/js/2.1f3ab948.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.d55c99d7.js",
     "static/js/2.1f3ab948.chunk.js",
     "static/css/main.3dd75ce5.chunk.css",
-    "static/js/main.04d01b28.chunk.js"
+    "static/js/main.37a0caa4.chunk.js"
   ]
 }
