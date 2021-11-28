@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/csea-react/static/css/main.3dd75ce5.chunk.css",
-    "main.js": "/csea-react/static/js/main.37a0caa4.chunk.js",
-    "main.js.map": "/csea-react/static/js/main.37a0caa4.chunk.js.map",
-    "runtime-main.js": "/csea-react/static/js/runtime-main.d55c99d7.js",
-    "runtime-main.js.map": "/csea-react/static/js/runtime-main.d55c99d7.js.map",
-    "static/js/2.1f3ab948.chunk.js": "/csea-react/static/js/2.1f3ab948.chunk.js",
-    "static/js/2.1f3ab948.chunk.js.map": "/csea-react/static/js/2.1f3ab948.chunk.js.map",
-    "static/js/3.c6ed8e3e.chunk.js": "/csea-react/static/js/3.c6ed8e3e.chunk.js",
-    "static/js/3.c6ed8e3e.chunk.js.map": "/csea-react/static/js/3.c6ed8e3e.chunk.js.map",
+    "main.js": "/csea-react/static/js/main.23489958.chunk.js",
+    "main.js.map": "/csea-react/static/js/main.23489958.chunk.js.map",
+    "runtime-main.js": "/csea-react/static/js/runtime-main.3329b1d4.js",
+    "runtime-main.js.map": "/csea-react/static/js/runtime-main.3329b1d4.js.map",
+    "static/js/2.963b4a2c.chunk.js": "/csea-react/static/js/2.963b4a2c.chunk.js",
+    "static/js/2.963b4a2c.chunk.js.map": "/csea-react/static/js/2.963b4a2c.chunk.js.map",
+    "static/js/3.846c0940.chunk.js": "/csea-react/static/js/3.846c0940.chunk.js",
+    "static/js/3.846c0940.chunk.js.map": "/csea-react/static/js/3.846c0940.chunk.js.map",
     "index.html": "/csea-react/index.html",
     "static/css/main.3dd75ce5.chunk.css.map": "/csea-react/static/css/main.3dd75ce5.chunk.css.map",
     "static/media/font.css": "/csea-react/static/media/Lobster-Regular.9535d77e.ttf",
     "static/media/csealogo-QUIZIX.b2f33a82.png": "/csea-react/static/media/csealogo-QUIZIX.b2f33a82.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.d55c99d7.js",
-    "static/js/2.1f3ab948.chunk.js",
+    "static/js/runtime-main.3329b1d4.js",
+    "static/js/2.963b4a2c.chunk.js",
     "static/css/main.3dd75ce5.chunk.css",
-    "static/js/main.37a0caa4.chunk.js"
+    "static/js/main.23489958.chunk.js"
   ]
 }
