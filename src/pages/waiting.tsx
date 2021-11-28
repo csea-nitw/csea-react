@@ -35,7 +35,7 @@ function Waiting() {
       >
         <Grid item>
           <Typography variant="h2" mt={4} style={{ color: '#3c3d3d' }}>
-            Quiz Di Mezo&apos;ora Will Start in
+            Quiz Di Mezz&apos;ora Will Start in
           </Typography>
           {/* Timer starts here */}
           <Typography variant="h4" mt={4} style={{ color: 'black' }}>

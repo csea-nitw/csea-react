@@ -4,9 +4,15 @@ import React, { useEffect, useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
 import Countdown from 'react-countdown';
 import { useNavigate } from 'react-router-dom';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
+
 import { attempt1 } from '../constants/attempt1';
 import { attempt2 } from '../constants/attempt2';
 import { attempt3 } from '../constants/attempt3';
+
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 function Quiz() {
   const user = localStorage.getItem('quiz-user');
@@ -146,11 +152,11 @@ function Quiz() {
   }, [submitted]);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {isReady ? (
         <>
           <Typography variant="h4" fontWeight={600} m={1}>
-            Quiz #123
+            Quiz Di Mezz&apos;ora
           </Typography>
           <Typography variant="h6" sx={{ color: 'gray' }} fontWeight={600} m={1}>
             Time Left: <Countdown date={endTime} />
@@ -513,7 +519,7 @@ function Quiz() {
       ) : (
         <></>
       )}
-    </>
+    </ThemeProvider>
   );
 }
 
