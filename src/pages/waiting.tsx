@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Countdown from 'react-countdown';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 function Waiting() {
-  const [startTime, setStartTime] = useState(1638029000000);
-  const [active, setActive] = useState(true);
+  const startTime = 1638118800000 - 30 * 60 * 1000 - 4 * 60 * 60 * 1000;
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const localAuth = localStorage.getItem('csea-quiz-token');
@@ -14,10 +17,6 @@ function Waiting() {
       navigate('/register');
     }
   }, []);
-  const localStart = localStorage.getItem('start-time');
-  if (localStart) {
-    setStartTime(new Date(localStart).getTime);
-  }
   setInterval(() => {
     if (Date.now() > startTime) {
       setActive(false);
@@ -25,31 +24,63 @@ function Waiting() {
     }
   }, 100);
   return (
-    <Grid
-      container
-      alignItems="center"
-      justifyContent="center"
-      spacing={2}
-      style={{ height: '100vh', backgroundColor: '#F3F7F7' }}
-    >
-      <Grid item xs={12} mt={3}>
-        <Typography variant="h2" mt={4} style={{ color: '#3c3d3d' }}>
-          Quiz #122 Will Start in
-        </Typography>
-        {/* Timer starts here */}
-        <Typography variant="h4" mt={4} style={{ color: 'black' }}>
-          <Countdown date={startTime} />
-        </Typography>
+    <ThemeProvider theme={theme}>
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justifyContent="space-around"
+        spacing={2}
+        style={{ height: '90vh', backgroundColor: '#F3F7F7' }}
+      >
+        <Grid item>
+          <Typography variant="h2" mt={4} style={{ color: '#3c3d3d' }}>
+            Quiz Di Mezo&apos;ora Will Start in
+          </Typography>
+          {/* Timer starts here */}
+          <Typography variant="h4" mt={4} style={{ color: 'black' }}>
+            <Countdown date={startTime} />
+          </Typography>
+        </Grid>
+        <Grid item>
+          {active ? (
+            <Link to="/quiz">
+              <Button variant="contained" size="large" disableElevation disabled={!active}>
+                {' '}
+                Start Quiz
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="contained" size="large" disableElevation disabled={!active}>
+              {' '}
+              Start Quiz
+            </Button>
+          )}
+        </Grid>
+        <Grid item>
+          <Typography variant="h4" fontWeight="bold">
+            Instructions
+          </Typography>
+          <Typography>
+            1. You <strong>CAN</strong> use calculators
+          </Typography>
+          <Typography>
+            2. You <strong>CAN</strong> switch tabs during contest
+          </Typography>
+          <Typography>
+            3. <strong>Don&apos;t</strong> click on submit before you&apos;re done as system will
+            accept only first entry as valid attempt
+          </Typography>
+          <Typography>
+            4.{' '}
+            <strong>
+              The platform is still under development so don&apos;t refresh while you attempt the
+              quiz
+            </strong>
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid item md={12} style={{ position: 'relative', top: '-150px', marginTop: '50px' }}>
-        <Link to="/quiz">
-          <Button variant="contained" size="large" disableElevation disabled={active}>
-            {' '}
-            Start Quiz
-          </Button>
-        </Link>
-      </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 }
 

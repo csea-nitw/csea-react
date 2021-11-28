@@ -1,69 +1,56 @@
 import { Button, Grid, Typography, Stack, Card, CardContent } from '@mui/material';
 import Box from '@mui/material/Box';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
 import Countdown from 'react-countdown';
 import { useNavigate } from 'react-router-dom';
-import { quizAvailable } from '../constants/sampleQuizData';
+import { attempt1 } from '../constants/attempt1';
+import { attempt2 } from '../constants/attempt2';
+import { attempt3 } from '../constants/attempt3';
 
 function Quiz() {
   const user = localStorage.getItem('quiz-user');
   const [currentQs, setCurrentQs] = useState(0);
-  const [startTime, setStartTime] = useState(1638030000000);
   const [submitted, setSubmitted] = useState(false);
   const [attempts, setAttempts] = useState(false);
-  const [thisQuiz, setThisQuiz] = useState(quizAvailable);
+  const [thisQuiz, setThisQuiz] = useState(attempt1);
   const [isReady, setIsReady] = useState(false);
+  const [interval, setIntervalState] = useState<NodeJS.Timeout | null>(null);
+  const endTime = 1638118800000 - 4 * 60 * 60 * 1000;
+  const startTime = 1638118800000 - 30 * 60 * 1000 - 4 * 60 * 60 * 1000;
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    console.log(thisQuiz);
+    // console.log(thisQuiz);
     setIsReady(true);
   }, [thisQuiz]);
 
   React.useEffect(() => {
-    if (Date.now() < 1638029000000) {
+    if (Date.now() < startTime) {
       navigate('/wait');
+      return;
+    }
+    if (Date.now() > endTime) {
+      navigate('/result-wait');
       return;
     }
     const localAuth = localStorage.getItem('csea-quiz-token');
     if (!localAuth) {
       navigate('/register');
     }
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    fetch('https://csea-backend.herokuapp.com/api/attempt/6196910a7abcf523affc1602', requestOptions)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('response is not ok');
-        }
-        if (response.status !== 200) {
-          throw new Error('Status code is not 200');
-        }
-        return response.json();
-      })
-      .then((val) => {
-        console.log(val);
-        setThisQuiz(val);
-      })
-      .catch((err) => {
-        console.log(err);
-
-        // window.location.href = '/';
-      });
+    const attemptId = Math.floor(Math.random() * 3);
+    // console.log(attemptId);
+    if (attemptId === 1) {
+      setThisQuiz(attempt2);
+    } else if (attemptId === 2) {
+      setThisQuiz(attempt3);
+    }
   }, []);
 
   const [selected, setSelected] = useState([
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1,
   ]);
-
-  const localStart = localStorage.getItem('start-time');
-  if (localStart) {
-    setStartTime(new Date(localStart).getTime);
-  }
 
   const submitQuestion = () => {
     const localToken = localStorage.getItem('csea-quiz-token');
@@ -72,7 +59,7 @@ function Quiz() {
       quiz: thisQuiz.quiz_id,
       responses: [{}],
     };
-    console.log(savedResponse);
+    // console.log(savedResponse);
     thisQuiz.questions.forEach((question, index) => {
       const ques = {
         question: question.qsCode,
@@ -86,11 +73,13 @@ function Quiz() {
       body: JSON.stringify(savedResponse),
     };
     if (submitted) return;
+    setSubmitted(true);
     //  console.log(savedResponse);
     fetch('https://csea-backend.herokuapp.com/api/response', requestOptions)
       .then((response) => {
         if (response.status === 500) {
-          alert('already responded or try contacting csea');
+          setSubmitted(true);
+          // alert('plz close this tab');
           navigate('/result-wait');
         }
         if (!response.ok) {
@@ -99,7 +88,6 @@ function Quiz() {
         if (response.status !== 200) {
           throw new Error('Status code is not 200');
         }
-        setSubmitted(true);
         return response.json();
       })
       .then((val) => {
@@ -112,15 +100,33 @@ function Quiz() {
       });
   };
 
-  setInterval(() => {
-    if (Date.now() > startTime && Date.now() < startTime + 200) {
-      if (!attempts) {
-        setAttempts(true);
-        console.log(attempts);
-        submitQuestion();
+  React.useEffect(() => {
+    // console.log('yo');
+    // console.log(Date.now() + 15 * 60 * 1000);
+    setIntervalState(
+      setInterval(() => {
+        if (Date.now() > endTime) {
+          if (Date.now() > endTime + 10000) {
+            // alert(Date.now() + endTime);
+            navigate('/result-wait');
+          } else if (!attempts) {
+            setAttempts(true);
+            console.log(attempts);
+            submitQuestion();
+            clearInterval(interval!);
+          }
+        }
+      }, 4000),
+    );
+    // cleanUp
+    return () => {
+      // console.log('clean');
+      if (interval) {
+        clearInterval(interval);
       }
-    }
-  }, 1000);
+    };
+  }, []);
+
   const getColorForPallete = (index: number, selectedOption: number): string => {
     if (selectedOption !== -1) return '#1AA260  ';
     if (currentQs === index) return '#f2c215';
@@ -147,7 +153,7 @@ function Quiz() {
             Quiz #123
           </Typography>
           <Typography variant="h6" sx={{ color: 'gray' }} fontWeight={600} m={1}>
-            Time Left: <Countdown date={startTime} />
+            Time Left: <Countdown date={endTime} />
           </Typography>
           <Button
             variant="outlined"
