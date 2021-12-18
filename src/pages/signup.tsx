@@ -39,7 +39,7 @@ function SignUp() {
     const checkAlreadySigned = localStorage.getItem('csea-quiz-token');
     // console.log(checkAlreadySigned);
     if (checkAlreadySigned) {
-      navigate('/wait');
+      navigate('/quiz');
     }
   }, []);
 

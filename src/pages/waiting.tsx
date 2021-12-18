@@ -1,7 +1,6 @@
 import { Grid, Typography, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 
@@ -43,9 +42,9 @@ function Waiting() {
           </Typography>
         </Grid>
         <Grid item>
-          {active ? (
+          {active!==true ? (
             <Link to="/quiz">
-              <Button variant="contained" size="large" disableElevation disabled={!active}>
+              <Button variant="contained" size="large" disableElevation disabled={active}>
                 {' '}
                 Start Quiz
               </Button>

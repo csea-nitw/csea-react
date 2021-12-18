@@ -1,6 +1,5 @@
-import { CardContent, Card, Grid, Typography, Button } from '@mui/material';
+import { CardContent, Card, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import Countdown from 'react-countdown';
 import { useNavigate } from 'react-router-dom';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 

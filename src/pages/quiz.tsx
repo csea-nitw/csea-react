@@ -1,6 +1,6 @@
 import { Button, Grid, Typography, Stack, Card, CardContent } from '@mui/material';
 import Box from '@mui/material/Box';
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
 import Countdown from 'react-countdown';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,6 @@ let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
 function Quiz() {
-  const user = localStorage.getItem('quiz-user');
   const [currentQs, setCurrentQs] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [attempts, setAttempts] = useState(false);
@@ -96,7 +95,7 @@ function Quiz() {
         }
         return response.json();
       })
-      .then((val) => {
+      .then(() => {
         setSubmitted(true);
       })
       .catch((err) => {

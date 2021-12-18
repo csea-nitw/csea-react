@@ -48,7 +48,7 @@ function SignIn() {
         }
         return response.json();
       })
-      .then((val) => setSignIn(true))
+      .then(() => setSignIn(true))
       .catch((err) => {
         console.log(err);
         // window.location.href = '/';
