@@ -34,8 +34,9 @@ function App() {
       <div>
         <Router>
           <Routes>
-            <Route path="/" element={<QuizMas />} />
+            <Route path="/" element={<SignUp />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/quizmas" element={<QuizMas />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/wait" element={<Waiting />} />

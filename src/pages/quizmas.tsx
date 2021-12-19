@@ -8,6 +8,7 @@ import { useInput } from '@mui/base';
 import { styled } from '@mui/system';
 // import { useNavigate } from 'react-router-dom';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
+import { quizmasQuestion } from '../constants/sampleQuizmas';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -55,12 +56,44 @@ const CustomInput = React.forwardRef(
 
 function QuizMas() {
   const [isReady, setIsReady] = useState(false);
+  const [response, setResponse] = useState('');
   const imgUrl = '';
   const QsText = 'Some Question';
   useEffect(() => {
     setIsReady(true);
   });
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
+
+  const submit = () => {
+    if (response.length >= 1) {
+      const userId = localStorage.getItem('csea-quiz-token');
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 5000);
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId,
+          day: quizmasQuestion.day,
+          answer: response,
+        }),
+        signal: controller.signal,
+      };
+      fetch('http://localhost:8000/api/check', requestOptions)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('response is not ok');
+          } 
+          return res.json();
+        })
+        .then((val) => console.log(val))
+        .catch((err) => {
+          console.log(err);
+          // window.location.href = '/';
+        })
+        .finally(() => clearTimeout(id));
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,7 +110,7 @@ function QuizMas() {
               margin: '0 auto',
             }}
           >
-            {/* pallete thing here */}
+            {/* wishes here */}
 
             <Grid item md={12} height="max-content" margin="auto" container direction="column">
               <Card sx={{ padding: '2' }} variant="outlined">
@@ -102,16 +135,16 @@ function QuizMas() {
               <Card sx={{ padding: '2', margin: '3vh 2vw' }} variant="outlined">
                 <CardContent>
                   <Typography variant="h5" fontWeight={600} mb={0}>
-                    Question of the day
+                    Day {quizmasQuestion.day}
                   </Typography>
 
                   {/* Question */}
-                  {imgUrl !== '' ? (
+                  {quizmasQuestion.imageUrl !== '' ? (
                     <Grid item container direction="row">
                       <Grid item md={4} xs={12}>
                         <img
-                          src={imgUrl}
-                          alt={`${imgUrl}`}
+                          src={quizmasQuestion.imageUrl}
+                          alt={`${quizmasQuestion.imageUrl}`}
                           style={{
                             height: '150px',
                             margin: 'auto',
@@ -137,7 +170,7 @@ function QuizMas() {
                           sx={{ width: '100%', border: '' }}
                         >
                           {' '}
-                          {QsText}
+                          {quizmasQuestion.question}
                         </Box>
                       </Grid>
                     </Grid>
@@ -156,18 +189,25 @@ function QuizMas() {
                         sx={{ width: '100%', border: '' }}
                       >
                         {' '}
-                        {QsText}
+                        {quizmasQuestion.question}
                       </Box>
                     </Grid>
                   )}
                   <hr />
                   <br />
-                  <CustomInput aria-label="Demo input" placeholder="Type something..." />
+                  <CustomInput
+                    aria-label="Demo input"
+                    placeholder="Type something..."
+                    id="response-input"
+                    onChange={(e) => setResponse(e.target.value)}
+                  />
                   <Button
                     variant="contained"
                     style={{
                       margin: '10px',
                     }}
+                    value={response}
+                    onClick={() => submit()}
                   >
                     Check
                   </Button>
