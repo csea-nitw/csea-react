@@ -15,7 +15,7 @@ import { QuizMas } from './pages/quizmas';
 import { Quiz } from './pages/quiz';
 function App() {
   return (
-    <div className="App" style={{ backgroundColor: '#EAEEF3', minHeight: '100vh' }}>
+    <div className="App" style={{ backgroundColor: '#FAFAFA', minHeight: '100vh' }}>
       <Navbar />
       {/* <header className="App-header">
         Welcome to <img src="/logo192.png" alt="CSEA logo" width="200px" />

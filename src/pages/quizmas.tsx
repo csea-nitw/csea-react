@@ -3,12 +3,12 @@
 import { Button, Grid, Typography, Card, CardContent } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
-
 import { useInput } from '@mui/base';
 import { styled } from '@mui/system';
 // import { useNavigate } from 'react-router-dom';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { quizmasQuestion } from '../constants/sampleQuizmas';
+import '../css/quizmas.css';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -83,7 +83,7 @@ function QuizMas() {
         .then((res) => {
           if (!res.ok) {
             throw new Error('response is not ok');
-          } 
+          }
           return res.json();
         })
         .then((val) => console.log(val))
@@ -98,7 +98,7 @@ function QuizMas() {
   return (
     <ThemeProvider theme={theme}>
       {isReady ? (
-        <Grid>
+        <Grid className="baseGrid">
           <Grid
             container
             xs={12}
@@ -106,20 +106,18 @@ function QuizMas() {
             style={{
               userSelect: 'none',
               height: '100%',
-              backgroundColor: '#EAEEF3',
               margin: '0 auto',
             }}
           >
             {/* wishes here */}
 
             <Grid item md={12} height="max-content" margin="auto" container direction="column">
-              <Card sx={{ padding: '2' }} variant="outlined">
-                <CardContent>
-                  <Grid margin="auto">
-                    <Typography variant="h2">CSEA wishes you Merry Christmas</Typography>
-                  </Grid>
-                </CardContent>
-              </Card>
+              <Typography variant="h3" color="white" fontWeight={600}>
+                Quizzmas{' '}
+              </Typography>
+              <Typography variant="h4" color="white" fontWeight={500}>
+                Day {quizmasQuestion.day}
+              </Typography>
             </Grid>
 
             {/* main quiz panel will appear here */}
@@ -132,12 +130,12 @@ function QuizMas() {
               container
               direction="column"
             >
-              <Card sx={{ padding: '2', margin: '3vh 2vw' }} variant="outlined">
+              <Card
+                sx={{ padding: '2', margin: '3vh 2vw', borderRadius: '0px' }}
+                variant="outlined"
+                elevation={4}
+              >
                 <CardContent>
-                  <Typography variant="h5" fontWeight={600} mb={0}>
-                    Day {quizmasQuestion.day}
-                  </Typography>
-
                   {/* Question */}
                   {quizmasQuestion.imageUrl !== '' ? (
                     <Grid item container direction="row">
@@ -162,15 +160,8 @@ function QuizMas() {
                           margin: 'auto',
                         }}
                       >
-                        <Box
-                          padding="1vh"
-                          fontWeight={400}
-                          mt={1}
-                          mb={3}
-                          sx={{ width: '100%', border: '' }}
-                        >
-                          {' '}
-                          {quizmasQuestion.question}
+                        <Box padding="1vh" mt={1} mb={3} sx={{ width: '100%', border: '' }}>
+                          <Typography fontWeight={500}> {quizmasQuestion.question}</Typography>
                         </Box>
                       </Grid>
                     </Grid>
@@ -188,8 +179,10 @@ function QuizMas() {
                         mb={2}
                         sx={{ width: '100%', border: '' }}
                       >
-                        {' '}
-                        {quizmasQuestion.question}
+                        <Typography variant="h5" fontWeight={500}>
+                          {' '}
+                          {quizmasQuestion.question}
+                        </Typography>
                       </Box>
                     </Grid>
                   )}
@@ -200,11 +193,15 @@ function QuizMas() {
                     placeholder="Type something..."
                     id="response-input"
                     onChange={(e) => setResponse(e.target.value)}
+                    style={{ width: '75%' }}
                   />
                   <Button
                     variant="contained"
                     style={{
                       margin: '10px',
+                      marginTop: '20px',
+                      width: '50%',
+                      backgroundColor: '#F12337',
                     }}
                     value={response}
                     onClick={() => submit()}
@@ -212,7 +209,11 @@ function QuizMas() {
                     Check
                   </Button>
                 </CardContent>
+                <hr />
               </Card>
+              <Typography sx={{ color: 'white', fontWeight: 'bold' }}>
+                CSEA Wishes You a Merry Christmas!
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
