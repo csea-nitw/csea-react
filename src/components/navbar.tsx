@@ -43,7 +43,7 @@ function ButtonAppBar() {
                 }}
                 onClick={() => {
                   localStorage.removeItem('csea-quizmas-token');
-                  window.location.href = '/';
+                  window.location.href = '/csea-react/#';
                 }}
               >
                 <Typography> Logout</Typography>
