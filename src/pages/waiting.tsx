@@ -1,4 +1,4 @@
-import { Grid, Typography, Button, Card, CardContent, CardHeader, Box } from '@mui/material';
+import { Grid, Typography, Button, Card, CardContent, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Countdown from 'react-countdown';
@@ -12,7 +12,7 @@ function Waiting() {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    const localAuth = localStorage.getItem('csea-quiz-token');
+    const localAuth = localStorage.getItem('csea-quizmas-token');
     if (!localAuth) {
       navigate('/register');
     }
@@ -98,7 +98,7 @@ function Waiting() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid
+        {/* <Grid
           item
           xs={12}
           md={6}
@@ -129,7 +129,7 @@ function Waiting() {
               quiz
             </strong>
           </Typography>
-        </Grid>
+        </Grid> */}
         {/* <Grid item>
           <hr style={{ width: '100vw', marginBottom: '20px' }} />
           

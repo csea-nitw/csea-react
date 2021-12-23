@@ -35,13 +35,13 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<SignUp />} />
-            <Route path="/quiz" element={<Quiz />} />
+            {/* <Route path="/quiz" element={<Quiz />} /> */}
             <Route path="/quizmas" element={<QuizMas />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/wait" element={<Waiting />} />
-            <Route path="/result-wait" element={<ResultWaiting />} />
-            <Route path="/result" element={<Result />} />
+            {/* <Route path="/result-wait" element={<ResultWaiting />} /> */}
+            {/* <Route path="/result" element={<Result />} /> */}
           </Routes>
         </Router>
       </div>

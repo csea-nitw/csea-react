@@ -1,11 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Button, Grid, Typography, Card, CardContent } from '@mui/material';
+import { Grid, Typography, Card, CardContent } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
+
 import { useInput } from '@mui/base';
 import { styled } from '@mui/system';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { quizmasQuestion } from '../constants/sampleQuizmas';
 import '../css/quizmas.css';
@@ -57,18 +63,28 @@ const CustomInput = React.forwardRef(
 function QuizMas() {
   const [isReady, setIsReady] = useState(false);
   const [response, setResponse] = useState('');
-  const imgUrl = '';
-  const QsText = 'Some Question';
+  const [open, setOpen] = useState(false);
+  const [errText, setErrText] = useState('');
+  const [result, setResult] = useState({ message: '' });
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('csea-quizmas-token');
   useEffect(() => {
+    if (!userId) {
+      navigate('/register');
+    }
     setIsReady(true);
-  });
-  //   const navigate = useNavigate();
+  }, []);
+
+  useEffect(() => {
+    if (result.message) {
+      setErrText(result.message);
+    }
+  }, [result]);
 
   const submit = () => {
     if (response.length >= 1) {
-      const userId = localStorage.getItem('csea-quiz-token');
       const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), 5000);
+      const id = setTimeout(() => controller.abort(), 10000);
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -79,14 +95,15 @@ function QuizMas() {
         }),
         signal: controller.signal,
       };
-      fetch('http://localhost:8000/api/check', requestOptions)
+      fetch('https://csea-backend.herokuapp.com/api/check', requestOptions)
         .then((res) => {
           if (!res.ok) {
             throw new Error('response is not ok');
           }
+          setOpen(true);
           return res.json();
         })
-        .then((val) => console.log(val))
+        .then((val) => setResult(val))
         .catch((err) => {
           console.log(err);
           // window.location.href = '/';
@@ -135,6 +152,26 @@ function QuizMas() {
                 variant="outlined"
                 elevation={4}
               >
+                <Collapse in={open}>
+                  <Alert
+                    severity="info"
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          setOpen(false);
+                        }}
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                  >
+                    {errText}
+                  </Alert>
+                </Collapse>
                 <CardContent>
                   {/* Question */}
                   {quizmasQuestion.imageUrl !== '' ? (

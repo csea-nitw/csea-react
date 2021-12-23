@@ -36,7 +36,7 @@ function SignUp() {
   }, [firstName, lastName, email, password]);
 
   React.useEffect(() => {
-    const checkAlreadySigned = localStorage.getItem('csea-quiz-token');
+    const checkAlreadySigned = localStorage.getItem('csea-quizmas-token');
     // console.log(checkAlreadySigned);
     if (checkAlreadySigned) {
       navigate('/wait');
@@ -46,7 +46,7 @@ function SignUp() {
   React.useEffect(() => {
     if (userId) {
       // console.log(userId);
-      localStorage.setItem('csea-quiz-token', userId);
+      localStorage.setItem('csea-quizmas-token', userId);
       navigate('/wait');
     }
   }, [userId]);
@@ -113,7 +113,7 @@ function SignUp() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Register an account
+              Register for Quizmas
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -207,7 +207,7 @@ function SignUp() {
                 disabled={!allOk}
                 sx={{ mt: 3, mb: 2 }}
               >
-                Create an Account
+                Register
               </Button>
               <Grid container>
                 <Grid item>

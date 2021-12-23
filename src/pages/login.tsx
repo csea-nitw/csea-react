@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -5,7 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -18,11 +20,13 @@ const theme = createTheme();
 
 function SignIn() {
   const navigate = useNavigate();
-  const [signIn, setSignIn] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [signIn, setSignIn] = React.useState({ user: { _id: '' } });
   React.useEffect(() => {
-    if (signIn) {
-      localStorage.setItem('quiz-user', '61a0aa51714f2600234922f0');
-      navigate('/quiz');
+    if (signIn.user._id) {
+      localStorage.setItem('csea-quizmas-token', signIn.user._id);
+      navigate('/wait');
     }
   }, [signIn]);
 
@@ -31,14 +35,15 @@ function SignIn() {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), 5000);
     const requestOptions = {
-      method: 'GET',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
       signal: controller.signal,
     };
-    fetch(
-      'https://csea-backend.herokuapp.com/api/questions/61a08e68d2595b0023984644',
-      requestOptions,
-    )
+    fetch('https://csea-backend.herokuapp.com/api/signin', requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error('response is not ok');
@@ -48,7 +53,7 @@ function SignIn() {
         }
         return response.json();
       })
-      .then(() => setSignIn(true))
+      .then((res) => setSignIn(res))
       .catch((err) => {
         console.log(err);
         // window.location.href = '/';
@@ -95,6 +100,8 @@ function SignIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -105,6 +112,8 @@ function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -119,24 +128,10 @@ function SignIn() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    Dont have an account? Sign Up
-                  </Link>
+                <Grid item margin='auto'>
+                  <Link to="/register">Dont have an account? Sign Up</Link>
                 </Grid>
               </Grid>
-              <Typography variant="body2" color="text.secondary" align="center">
-                {'Copyright © '}
-                <Link color="inherit" href="cseanitw.in">
-                  CSEA
-                </Link>{' '}
-                {new Date().getFullYear()}.
-              </Typography>
             </Box>
           </Box>
         </Grid>
