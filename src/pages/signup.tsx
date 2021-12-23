@@ -10,11 +10,17 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
 function SignUp() {
+  const errText = 'Mobile number or mail already in use';
+  const [open, setOpen] = React.useState(false);
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -70,9 +76,12 @@ function SignUp() {
     fetch('https://csea-backend.herokuapp.com/api/signup', requestOptions)
       .then((response) => {
         if (!response.ok) {
+          setOpen(true);
           throw new Error('response is not ok');
         }
         if (response.status !== 200) {
+          setOpen(true);
+
           throw new Error('Status code is not 200');
         }
         return response.json();
@@ -116,6 +125,26 @@ function SignUp() {
               Register for Quizmas
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Collapse in={open}>
+                <Alert
+                  severity="error"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  {errText}
+                </Alert>
+              </Collapse>
               <TextField
                 margin="normal"
                 required

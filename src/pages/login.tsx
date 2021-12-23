@@ -12,6 +12,10 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +24,8 @@ const theme = createTheme();
 
 function SignIn() {
   const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+  const errText = 'Username or password did not match with records';
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [signIn, setSignIn] = React.useState({ user: { _id: '' } });
@@ -46,9 +52,11 @@ function SignIn() {
     fetch('https://csea-backend.herokuapp.com/api/signin', requestOptions)
       .then((response) => {
         if (!response.ok) {
+          setOpen(true);
           throw new Error('response is not ok');
         }
         if (response.status !== 200) {
+          setOpen(true);
           throw new Error('Status code is not 200');
         }
         return response.json();
@@ -91,6 +99,26 @@ function SignIn() {
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Collapse in={open}>
+                <Alert
+                  severity="error"
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  {errText}
+                </Alert>
+              </Collapse>
               <TextField
                 margin="normal"
                 required
@@ -103,6 +131,7 @@ function SignIn() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+
               <TextField
                 margin="normal"
                 required
@@ -128,7 +157,7 @@ function SignIn() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item margin='auto'>
+                <Grid item margin="auto">
                   <Link to="/register">Dont have an account? Sign Up</Link>
                 </Grid>
               </Grid>

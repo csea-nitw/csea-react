@@ -34,7 +34,7 @@ function App() {
       <div>
         <Router>
           <Routes>
-            <Route path="/" element={<SignUp />} />
+            <Route path="/" element={<SignIn />} />
             {/* <Route path="/quiz" element={<Quiz />} /> */}
             <Route path="/quizmas" element={<QuizMas />} />
             <Route path="/login" element={<SignIn />} />
