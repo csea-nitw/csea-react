@@ -122,7 +122,7 @@ function SignUp() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Register for Quizmas
+              Register for Quizzmas
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <Collapse in={open}>
