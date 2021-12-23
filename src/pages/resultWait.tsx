@@ -22,7 +22,7 @@ function ResultWaiting() {
     }
   }, [resp]);
   useEffect(() => {
-    const localAuth = localStorage.getItem('csea-quiz-token');
+    const localAuth = localStorage.getItem('csea-quizmas-token');
     if (!localAuth) {
       navigate('/register');
     }
