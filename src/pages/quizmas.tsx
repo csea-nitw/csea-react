@@ -130,7 +130,7 @@ function QuizMas() {
 
             <Grid item md={12} height="max-content" margin="auto" container direction="column">
               <Typography variant="h3" color="white" fontWeight={600}>
-                Quizzmas{' '}
+              Quizzmas{' '}
               </Typography>
               <Typography variant="h4" color="white" fontWeight={500}>
                 Day {quizmasQuestion.day}
