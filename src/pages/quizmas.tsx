@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
-
 import { useInput } from '@mui/base';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
@@ -130,7 +129,7 @@ function QuizMas() {
 
             <Grid item md={12} height="max-content" margin="auto" container direction="column">
               <Typography variant="h3" color="white" fontWeight={600}>
-              Quizzmas{' '}
+                Quizzmas{' '}
               </Typography>
               <Typography variant="h4" color="white" fontWeight={500}>
                 Day {quizmasQuestion.day}
