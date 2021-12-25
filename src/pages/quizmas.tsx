@@ -65,7 +65,7 @@ function QuizMas() {
   const [response, setResponse] = useState('');
   const [open, setOpen] = useState(false);
   const [errText, setErrText] = useState('');
-  const [result, setResult] = useState({ message: '' });
+  const [result, setResult] = useState({ message: '', expectedRankToday: '' });
   const navigate = useNavigate();
   const userId = localStorage.getItem('csea-quizmas-token');
   useEffect(() => {
@@ -77,7 +77,11 @@ function QuizMas() {
 
   useEffect(() => {
     if (result.message) {
-      setErrText(result.message);
+      if (result.expectedRankToday) {
+        setErrText(`Yayy!! You're at no ${result.expectedRankToday} to answer this correctly!!!`);
+      } else {
+        setErrText(result.message);
+      }
     }
   }, [result]);
 
@@ -95,7 +99,7 @@ function QuizMas() {
         }),
         signal: controller.signal,
       };
-      fetch('https://csea-backend.herokuapp.com/api/check', requestOptions)
+      fetch('https://csea-backend.herokuapp.com/api/signin', requestOptions)
         .then((res) => {
           if (!res.ok) {
             throw new Error('response is not ok');
