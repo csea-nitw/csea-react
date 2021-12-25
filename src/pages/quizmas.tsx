@@ -64,7 +64,7 @@ function QuizMas() {
   const [response, setResponse] = useState('');
   const [open, setOpen] = useState(false);
   const [errText, setErrText] = useState('');
-  const [result, setResult] = useState({ message: '' });
+  const [result, setResult] = useState({ message: '', expectedRankToday: '' });
   const navigate = useNavigate();
   const userId = localStorage.getItem('csea-quizmas-token');
   useEffect(() => {
@@ -76,7 +76,13 @@ function QuizMas() {
 
   useEffect(() => {
     if (result.message) {
-      setErrText(result.message);
+      if (result.expectedRankToday) {
+        if (parseInt(result.expectedRankToday, 10) < 10)
+          setErrText(`Yayy!! You're ranked ${result.expectedRankToday} on this question!!!`);
+        else setErrText(`Yayy!! You're among the first few on this question!!!`);
+      } else {
+        setErrText(result.message);
+      }
     }
   }, [result]);
 
@@ -97,6 +103,7 @@ function QuizMas() {
       fetch('https://csea-backend.herokuapp.com/api/check', requestOptions)
         .then((res) => {
           if (!res.ok) {
+            console.log(res);
             throw new Error('response is not ok');
           }
           setOpen(true);
@@ -218,6 +225,10 @@ function QuizMas() {
                         <Typography variant="h5" fontWeight={500}>
                           {' '}
                           {quizmasQuestion.question}
+                        </Typography>
+                        {/* hint */}
+                        <Typography variant="h6">
+                          (Hint: bob liked mathematical theorems.)
                         </Typography>
                       </Box>
                     </Grid>

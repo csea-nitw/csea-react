@@ -10,7 +10,8 @@ import { identity } from 'lodash';
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 function Waiting() {
-  const startTime = 1638118800000 - 30 * 60 * 1000 - 4 * 60 * 60 * 1000;
+  const startTime = 1640442600000;
+
   const [active, setActive] = useState(false);
   const [state, setState] = useState(true);
   const navigate = useNavigate();
@@ -79,8 +80,8 @@ function Waiting() {
                 Dec 25 @ 8:00 pm IST
               </Typography>
 
-              {active !== true ? (
-                <Link to="/quizmas">
+              {active !== false ? (
+                <Link to="/61c6b095c51a9900231414e6">
                   <Button
                     variant="contained"
                     sx={{ color: 'white' }}
@@ -95,15 +96,11 @@ function Waiting() {
               ) : (
                 <Button variant="outlined" size="small" disableElevation disabled={!active}>
                   {' '}
-                  Start Quiz
+                  <Typography textAlign="left">
+                    Quiz will start in <Countdown date={startTime} />
+                  </Typography>
                 </Button>
               )}
-              <Typography
-                textAlign="left"
-                sx={{ marginTop: '1rem', marginBottom: '0px', fontSize: 'small' }}
-              >
-                Quiz will start in <Countdown date={startTime} />
-              </Typography>
             </CardContent>
           </Card>
         </Grid>

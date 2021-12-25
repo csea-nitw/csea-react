@@ -8,11 +8,8 @@ import './css/font.css';
 import { Navbar } from './components/navbar';
 import { SignIn } from './pages/login';
 import { Waiting } from './pages/waiting';
-import { ResultWaiting } from './pages/resultWait';
-import { Result } from './pages/result';
 import { SignUp } from './pages/signup';
 import { QuizMas } from './pages/quizmas';
-import { Quiz } from './pages/quiz';
 function App() {
   const [regis, setRegis] = useState(true);
   return (
@@ -37,7 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SignIn />} />
             {/* <Route path="/quiz" element={<Quiz />} /> */}
-            <Route path="/quizmas" element={<QuizMas />} />
+            <Route path="/61c6b095c51a9900231414e6" element={<QuizMas />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/wait" element={<Waiting />} />
