@@ -123,14 +123,14 @@ function QuizMas() {
     <ThemeProvider theme={theme}>
       <Navbar />
       {isReady ? (
-        <Grid className="baseGrid">
+        <Grid className="baseGrid" style={{ overflow: 'auto' }}>
           <Grid
             container
             xs={12}
             direction="row"
             style={{
               userSelect: 'none',
-              height: '100%',
+              height: 'auto',
               margin: '0 auto',
             }}
           >

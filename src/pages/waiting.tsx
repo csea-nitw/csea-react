@@ -1,5 +1,5 @@
 import { Grid, Typography, Button, Card, CardContent, Box } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
@@ -12,7 +12,7 @@ theme = responsiveFontSizes(theme);
 function Waiting() {
   const startTime = 1640442600000;
 
-  const [active, setActive] = useState(false);
+  // const active = true;
   const navigate = useNavigate();
   useEffect(() => {
     const localAuth = localStorage.getItem('csea-quizmas-token');
@@ -27,12 +27,6 @@ function Waiting() {
     //   window.location.reload();
     // };
   }, []);
-  setInterval(() => {
-    if (Date.now() > startTime) {
-      setActive(false);
-      // navigate('/quiz');
-    }
-  }, 100);
 
   const instructText = {
     fontSize: '0.8rem',
@@ -81,8 +75,28 @@ function Waiting() {
               >
                 Dec 25 @ 8:00 pm IST
               </Typography>
+              {/* comment before quiz */}
+              {/* <Link to="/61c6b095c51a9900231414e6">
+                <Button
+                  variant="contained"
+                  sx={{ color: 'white' }}
+                  size="small"
+                  disableElevation
+                >
+                  {' '}
+                  Start Quiz
+                </Button>
+              </Link> */}
+              {/* comment when quiz will start */}
+              <Button variant="outlined" size="small" disableElevation disabled>
+                {' '}
+                <Typography textAlign="left">
+                  Quiz will start in <Countdown date={startTime} />
+                </Typography>
+              </Button>
 
-              {active !== true ? (
+              {/* To be figure out */}
+              {/* {active ? (
                 <Link to="/61c6b095c51a9900231414e6">
                   <Button
                     variant="contained"
@@ -102,7 +116,7 @@ function Waiting() {
                     Quiz will start in <Countdown date={startTime} />
                   </Typography>
                 </Button>
-              )}
+              )} */}
             </CardContent>
           </Card>
         </Grid>
