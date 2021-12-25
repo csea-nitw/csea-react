@@ -5,18 +5,25 @@ import Countdown from 'react-countdown';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import '../css/gradient.css';
 import '../css/waiting-bg.css';
+import { identity } from 'lodash';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 function Waiting() {
   const startTime = 1638118800000 - 30 * 60 * 1000 - 4 * 60 * 60 * 1000;
   const [active, setActive] = useState(false);
+  const [state, setState] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const localAuth = localStorage.getItem('csea-quizmas-token');
     if (!localAuth) {
       navigate('/register');
+    } else if (state) {
+      window.location.reload();
     }
+    return () => {
+      setState(false);
+    };
   }, []);
   setInterval(() => {
     if (Date.now() > startTime) {

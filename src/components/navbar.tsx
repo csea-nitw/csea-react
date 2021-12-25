@@ -9,7 +9,14 @@ import Csealogo from '../media/images/csealogo-QUIZIX.png';
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
-function ButtonAppBar() {
+const ButtonAppBar = () => {
+  const [register, setRegister] = React.useState(false);
+  const localAuth = localStorage.getItem('csea-quizmas-token');
+  React.useEffect(() => {
+    if (localAuth) {
+      setRegister(true);
+    } else setRegister(false);
+  });
   return (
     <AppBar position="sticky" style={{ backgroundColor: 'black' }}>
       <Toolbar>
@@ -29,31 +36,35 @@ function ButtonAppBar() {
               style={{
                 margin: 'auto',
                 textAlign: 'center',
-                maxWidth: '40%',
-                maxHeight: '50px',
+                maxHeight: '30px',
               }}
               alt="CSEA"
             />{' '}
           </Grid>
-          <ThemeProvider theme={theme}>
-            <Grid item md={2} xs={4}>
-              <Button
-                style={{
-                  color: 'white',
-                }}
-                onClick={() => {
-                  localStorage.removeItem('csea-quizmas-token');
-                  window.location.href = '/csea-react/#';
-                }}
-              >
-                <Typography> Logout</Typography>
-              </Button>
-            </Grid>
-          </ThemeProvider>
+          {register ? (
+            <ThemeProvider theme={theme}>
+              <Grid item md={2} xs={4}>
+                <Button
+                  style={{
+                    color: 'white',
+                  }}
+                  onClick={() => {
+                    localStorage.removeItem('csea-quizmas-token');
+                    window.location.href = '/csea-react/#';
+                    setRegister(false);
+                  }}
+                >
+                  <Typography> Logout</Typography>
+                </Button>
+              </Grid>
+            </ThemeProvider>
+          ) : (
+            <></>
+          )}
         </Grid>
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 export { ButtonAppBar as Navbar };

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-default-export */
 /* eslint import/newline-after-import: "off" */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 // import { Test } from './pages/test';
@@ -14,9 +14,9 @@ import { SignUp } from './pages/signup';
 import { QuizMas } from './pages/quizmas';
 import { Quiz } from './pages/quiz';
 function App() {
+  const [regis, setRegis] = useState(true);
   return (
     <div className="App" style={{ backgroundColor: '#FAFAFA', minHeight: '100vh' }}>
-      <Navbar />
       {/* <header className="App-header">
         Welcome to <img src="/logo192.png" alt="CSEA logo" width="200px" />
         <p>
@@ -33,6 +33,7 @@ function App() {
       </header> */}
       <div>
         <Router>
+          <Navbar />
           <Routes>
             <Route path="/" element={<SignIn />} />
             {/* <Route path="/quiz" element={<Quiz />} /> */}

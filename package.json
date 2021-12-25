@@ -12,6 +12,7 @@
     "@mui/system": "^5.1.1",
     "autoprefixer": "^9",
     "gh-pages": "^3.2.3",
+    "lodash": "^4.17.21",
     "postcss": "^7",
     "react": "^17.0.2",
     "react-countdown": "^2.3.2",

@@ -2,8 +2,11 @@
   background-image: url('../media/images/bg-image-quizmas.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 88.5vh;
   overflow: hidden;
   margin: 0;
   text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+  height: 88.5vh;
 }
