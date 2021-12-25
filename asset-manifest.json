@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/csea-react/static/css/main.e88595e8.chunk.css",
-    "main.js": "/csea-react/static/js/main.2c02fe5d.chunk.js",
-    "main.js.map": "/csea-react/static/js/main.2c02fe5d.chunk.js.map",
+    "main.js": "/csea-react/static/js/main.f7ced186.chunk.js",
+    "main.js.map": "/csea-react/static/js/main.f7ced186.chunk.js.map",
     "runtime-main.js": "/csea-react/static/js/runtime-main.f0a1647d.js",
     "runtime-main.js.map": "/csea-react/static/js/runtime-main.f0a1647d.js.map",
-    "static/js/2.e2d0913c.chunk.js": "/csea-react/static/js/2.e2d0913c.chunk.js",
-    "static/js/2.e2d0913c.chunk.js.map": "/csea-react/static/js/2.e2d0913c.chunk.js.map",
+    "static/js/2.17efc829.chunk.js": "/csea-react/static/js/2.17efc829.chunk.js",
+    "static/js/2.17efc829.chunk.js.map": "/csea-react/static/js/2.17efc829.chunk.js.map",
     "static/js/3.40780565.chunk.js": "/csea-react/static/js/3.40780565.chunk.js",
     "static/js/3.40780565.chunk.js.map": "/csea-react/static/js/3.40780565.chunk.js.map",
     "index.html": "/csea-react/index.html",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.f0a1647d.js",
-    "static/js/2.e2d0913c.chunk.js",
+    "static/js/2.17efc829.chunk.js",
     "static/css/main.e88595e8.chunk.css",
-    "static/js/main.2c02fe5d.chunk.js"
+    "static/js/main.f7ced186.chunk.js"
   ]
 }
