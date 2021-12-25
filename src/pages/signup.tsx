@@ -15,6 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Navbar } from '../components/navbar';
 
 const theme = createTheme();
 
@@ -96,6 +97,7 @@ function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Grid container component="main" sx={{ height: '100%' }} justifyContent="center">
         <CssBaseline />
 

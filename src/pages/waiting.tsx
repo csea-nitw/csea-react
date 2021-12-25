@@ -5,7 +5,7 @@ import Countdown from 'react-countdown';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import '../css/gradient.css';
 import '../css/waiting-bg.css';
-import { identity } from 'lodash';
+import { Navbar } from '../components/navbar';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -13,18 +13,19 @@ function Waiting() {
   const startTime = 1640442600000;
 
   const [active, setActive] = useState(false);
-  const [state, setState] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const localAuth = localStorage.getItem('csea-quizmas-token');
     if (!localAuth) {
       navigate('/register');
-    } else if (state) {
-      window.location.reload();
     }
-    return () => {
-      setState(false);
-    };
+    // if (!window.location.hash) {
+    //   window.location.href += '#loaded';
+    //   window.location.reload();
+    // }
+    // return () => {
+    //   window.location.reload();
+    // };
   }, []);
   setInterval(() => {
     if (Date.now() > startTime) {
@@ -39,6 +40,7 @@ function Waiting() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Grid
         container
         direction="row"
@@ -80,7 +82,7 @@ function Waiting() {
                 Dec 25 @ 8:00 pm IST
               </Typography>
 
-              {active !== false ? (
+              {active !== true ? (
                 <Link to="/61c6b095c51a9900231414e6">
                   <Button
                     variant="contained"

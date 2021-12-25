@@ -1,17 +1,16 @@
 /* eslint-disable import/no-default-export */
 /* eslint import/newline-after-import: "off" */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 // import { Test } from './pages/test';
 import './css/font.css';
-import { Navbar } from './components/navbar';
+// import { Navbar } from './components/navbar';
 import { SignIn } from './pages/login';
 import { Waiting } from './pages/waiting';
 import { SignUp } from './pages/signup';
 import { QuizMas } from './pages/quizmas';
 function App() {
-  const [regis, setRegis] = useState(true);
   return (
     <div className="App" style={{ backgroundColor: '#FAFAFA', minHeight: '100vh' }}>
       {/* <header className="App-header">
@@ -30,7 +29,7 @@ function App() {
       </header> */}
       <div>
         <Router>
-          <Navbar />
+          {/* <Navbar /> */}
           <Routes>
             <Route path="/" element={<SignIn />} />
             {/* <Route path="/quiz" element={<Quiz />} /> */}

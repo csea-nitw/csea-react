@@ -19,6 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '../components/navbar';
 
 const theme = createTheme();
 
@@ -70,6 +71,7 @@ function SignIn() {
   };
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Grid container component="main" sx={{ height: '95vh' }} justifyContent="center">
         <CssBaseline />
 

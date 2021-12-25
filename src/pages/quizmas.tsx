@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import { quizmasQuestion } from '../constants/sampleQuizmas';
 import '../css/quizmas.css';
+import { Navbar } from '../components/navbar';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -120,6 +121,7 @@ function QuizMas() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       {isReady ? (
         <Grid className="baseGrid">
           <Grid
