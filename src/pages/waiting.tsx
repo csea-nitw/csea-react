@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import '../css/gradient.css';
+import '../css/waiting-bg.css';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -36,7 +37,8 @@ function Waiting() {
         alignItems="center"
         justifyContent="space-around"
         spacing={2}
-        style={{ height: '90vh', backgroundColor: '#FAFAFA' }}
+        style={{ height: '91.5vh', backgroundColor: '#FAFAFA' }}
+        className="css-bg-selector"
       >
         <Grid item xs={12} md={6} className="noselect">
           <Card className="css-selector" sx={{ height: '100%', boxShadow: '3', margin: '2rem' }}>
