@@ -77,7 +77,9 @@ function QuizMas() {
   useEffect(() => {
     if (result.message) {
       if (result.expectedRankToday) {
-        setErrText(`Yayy!! You're at no ${result.expectedRankToday} to answer this correctly!!!`);
+        if (parseInt(result.expectedRankToday, 10) < 10)
+          setErrText(`Yayy!! You're ranked ${result.expectedRankToday} on this question!!!`);
+        else setErrText(`Yayy!! You're among the first few on this question!!!`);
       } else {
         setErrText(result.message);
       }
@@ -98,9 +100,10 @@ function QuizMas() {
         }),
         signal: controller.signal,
       };
-      fetch('https://csea-backend.herokuapp.com/api/signin', requestOptions)
+      fetch('http://localhost:8000/api/check', requestOptions)
         .then((res) => {
           if (!res.ok) {
+            console.log(res);
             throw new Error('response is not ok');
           }
           setOpen(true);
@@ -222,6 +225,10 @@ function QuizMas() {
                         <Typography variant="h5" fontWeight={500}>
                           {' '}
                           {quizmasQuestion.question}
+                        </Typography>
+                        {/* hint */}
+                        <Typography variant="h6">
+                          (Hint: bob liked mathematical theorems.)
                         </Typography>
                       </Box>
                     </Grid>
