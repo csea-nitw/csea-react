@@ -100,7 +100,7 @@ function QuizMas() {
         }),
         signal: controller.signal,
       };
-      fetch('http://localhost:8000/api/check', requestOptions)
+      fetch('https://csea-backend.herokuapp.com/api/check', requestOptions)
         .then((res) => {
           if (!res.ok) {
             console.log(res);
