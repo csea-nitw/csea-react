@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/csea-react/static/css/main.5ad9ef85.chunk.css",
-    "main.js": "/csea-react/static/js/main.850f9937.chunk.js",
-    "main.js.map": "/csea-react/static/js/main.850f9937.chunk.js.map",
+    "main.css": "/csea-react/static/css/main.e88595e8.chunk.css",
+    "main.js": "/csea-react/static/js/main.1de89994.chunk.js",
+    "main.js.map": "/csea-react/static/js/main.1de89994.chunk.js.map",
     "runtime-main.js": "/csea-react/static/js/runtime-main.8a023cb3.js",
     "runtime-main.js.map": "/csea-react/static/js/runtime-main.8a023cb3.js.map",
     "static/js/2.c72912dc.chunk.js": "/csea-react/static/js/2.c72912dc.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.ec601adb.chunk.js": "/csea-react/static/js/3.ec601adb.chunk.js",
     "static/js/3.ec601adb.chunk.js.map": "/csea-react/static/js/3.ec601adb.chunk.js.map",
     "index.html": "/csea-react/index.html",
-    "static/css/main.5ad9ef85.chunk.css.map": "/csea-react/static/css/main.5ad9ef85.chunk.css.map",
+    "static/css/main.e88595e8.chunk.css.map": "/csea-react/static/css/main.e88595e8.chunk.css.map",
     "static/media/font.css": "/csea-react/static/media/Lobster-Regular.9535d77e.ttf",
     "static/media/quizmas.css": "/csea-react/static/media/bg-image-quizmas.ea45ce2a.jpg",
     "static/media/csealogo-QUIZIX.b2f33a82.png": "/csea-react/static/media/csealogo-QUIZIX.b2f33a82.png",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.8a023cb3.js",
     "static/js/2.c72912dc.chunk.js",
-    "static/css/main.5ad9ef85.chunk.css",
-    "static/js/main.850f9937.chunk.js"
+    "static/css/main.e88595e8.chunk.css",
+    "static/js/main.1de89994.chunk.js"
   ]
 }
