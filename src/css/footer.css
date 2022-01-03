@@ -1,0 +1,24 @@
+.footer-container {
+  color: white !important;
+  padding-top: 3rem;
+  padding-bottom: 0.7rem;
+  margin: -8px;
+  background-color: #202020 !important;
+}
+.icon {
+  color: "white";
+  background-color: #202020;
+  font-size: 1.2rem !important;
+  padding: 0.2rem;
+  border-radius: 50%;
+}
+.MuiIconButton-root {
+  color: white !important;
+  padding: 0rem !important;
+}
+.footer-container img {
+  height: 1.5rem;
+}
+.csea-logo {
+  margin-bottom: 0.3rem;
+}
