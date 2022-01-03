@@ -7,3 +7,31 @@
 
   font-weight: normal;
 }
+
+@font-face {
+  font-family: "text-font";
+  src: local("text-font"),
+    url("../fonts/normal/Manrope-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "title-font";
+  src: local("title-font"),
+    url("../fonts/bold/ClashDisplay-Semibold.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "title-normal-font";
+  src: local("title-normal-font"),
+    url("../fonts/bold/ClashDisplay-Light.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "title-semi-normal-font";
+  src: local("title-semi-normal-font"),
+    url("../fonts/bold/ClashDisplay-Medium.ttf") format("truetype");
+  font-weight: 300;
+}
