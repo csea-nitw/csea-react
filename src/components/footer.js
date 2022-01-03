@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createTheme } from "@material-ui/core/styles";
-import { Divider, IconButton, Link, Toolbar } from "@material-ui/core";
+import { IconButton, Link, Toolbar } from "@material-ui/core";
 import Stack from "@mui/material/Stack";
 import Logo from "../csea-edit.png";
 import { Box } from "@mui/system";
@@ -28,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
   footLeft: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "block",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
   },
   footMobile: {
@@ -48,33 +50,17 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  divider: {
-    display: "block",
-    width: "17rem",
-    marginTop: "1rem",
-    marginBottom: "1rem",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
   copyright: {
     fontSize: "0.7rem",
+    fontFamily: "text-font",
   },
 }));
 
 function Copyright() {
   const classes = useStyles();
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      className={classes.copyright}
-    >
-      {"© "}
-      <Link color="inherit" href="https://mui.com/">
-        CSEA NITW
-      </Link>
+    <Typography variant="body2" align="center" className={classes.copyright}>
+      © CSEA NITW
     </Typography>
   );
 }
@@ -83,108 +69,202 @@ const Footer = () => {
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>
-      <div className="Home">
+      <div className="footer-container">
         <Box display="flex" justifyContent="space-between" pl={5} pr={5} mb={2}>
           <Box className={classes.footLeft}>
             <Toolbar className="csea-logo">
               <Box component="img" alt="Your logo." src={Logo} />
             </Toolbar>
-            <Stack direction="row" spacing={2}>
-              <IconButton aria-label="Instagram.com">
+            <Stack direction="row" spacing={1}>
+              <IconButton
+                aria-label="Instagram.com"
+                onClick={() => {
+                  window.open("https://www.instagram.com/csea_nitw/", "_blank");
+                }}
+              >
                 <InstagramIcon className="icon" />
               </IconButton>
-              <IconButton aria-label="Linkedin.com">
+              <IconButton
+                aria-label="Linkedin.com"
+                onClick={() => {
+                  window.open(
+                    "https://www.linkedin.com/company/csea-nitw/",
+                    "_blank"
+                  );
+                }}
+              >
                 <LinkedInIcon className="icon" />
               </IconButton>
-              <IconButton aria-label="Facebook.com">
+              <IconButton
+                aria-label="Facebook.com"
+                onClick={() => {
+                  window.open("https://www.facebook.com/cseanitw", "_blank");
+                }}
+              >
                 <FacebookIcon className="icon" />
               </IconButton>
-              <IconButton aria-label="Twitter.com">
+              <IconButton
+                aria-label="Twitter.com"
+                onClick={() => {
+                  window.open("https://twitter.com/cseanitw", "_blank");
+                }}
+              >
                 <TwitterIcon className="icon" />
               </IconButton>
             </Stack>
           </Box>
           <Box className={classes.footMobile}>
-            <Stack mb={1} container mt={2} direction="row" spacing={7}>
+            <Stack mb={2} container mt={2} direction="row" spacing={7}>
               <Stack spacing={1}>
                 <Box>
                   <Link
                     href="/"
                     className="hlink"
                     color="inherit"
-                    fontFamily="title-font"
+                    style={{
+                      fontFamily: "title-semi-normal-font",
+                    }}
                   >
                     Quizex
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/" className="hlink" color="inherit">
+                  <Link
+                    href="/"
+                    className="hlink"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-semi-normal-font",
+                    }}
+                  >
                     Internito
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="/" className="hlink" color="inherit">
+                  <Link
+                    href="/"
+                    className="hlink"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-semi-normal-font",
+                    }}
+                  >
                     Contact
                   </Link>
                 </Box>
               </Stack>
               <Stack spacing={1}>
                 <Box>
-                  <Link href="#" color="inherit">
+                  <Link
+                    href="/"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-normal-font",
+                    }}
+                  >
                     Home
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="#" color="inherit">
+                  <Link
+                    href="/"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-normal-font",
+                    }}
+                  >
                     Events
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="#" color="inherit">
+                  <Link
+                    href="/"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-normal-font",
+                    }}
+                  >
                     Teams
                   </Link>
                 </Box>
               </Stack>
               <Stack spacing={1}>
                 <Box>
-                  <Link href="#" color="inherit">
+                  <Link
+                    href="/"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-normal-font",
+                    }}
+                  >
                     Gallery
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="#" color="inherit">
+                  <Link
+                    href="/"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-normal-font",
+                    }}
+                  >
                     Alumni
                   </Link>
                 </Box>
                 <Box>
-                  <Link href="#" color="inherit">
+                  <Link
+                    href="/"
+                    color="inherit"
+                    style={{
+                      fontFamily: "title-normal-font",
+                    }}
+                  >
                     Careers
                   </Link>
                 </Box>
               </Stack>
             </Stack>
-            <Divider
-              className={classes.divider}
-              style={{
-                borderTop: "0.1rem solid rgba(0,0,0,0.25)",
-              }}
-              variant="middle"
-            />
             <Box className={classes.footBottom}>
               <Toolbar>
                 <Box component="img" alt="Your logo." src={Logo} />
               </Toolbar>
-              <Stack direction="row" spacing={2} mt={1} mb={2.5}>
-                <IconButton aria-label="Instagram.com">
+              <Stack direction="row" spacing={1} mt={1} mb={2.5}>
+                <IconButton
+                  aria-label="Instagram.com"
+                  onClick={() => {
+                    window.open(
+                      "https://www.instagram.com/csea_nitw/",
+                      "_blank"
+                    );
+                  }}
+                >
                   <InstagramIcon className="icon" />
                 </IconButton>
-                <IconButton aria-label="Linkedin.com">
+                <IconButton
+                  aria-label="Linkedin.com"
+                  onClick={() => {
+                    window.open(
+                      "https://www.linkedin.com/company/csea-nitw/",
+                      "_blank"
+                    );
+                  }}
+                >
                   <LinkedInIcon className="icon" />
                 </IconButton>
-                <IconButton aria-label="Facebook.com">
+                <IconButton
+                  aria-label="Facebook.com"
+                  onClick={() => {
+                    window.open("https://www.facebook.com/cseanitw", "_blank");
+                  }}
+                >
                   <FacebookIcon className="icon" />
                 </IconButton>
-                <IconButton aria-label="Twitter.com">
+                <IconButton
+                  aria-label="Twitter.com"
+                  onClick={() => {
+                    window.open("https://twitter.com/cseanitw", "_blank");
+                  }}
+                >
                   <TwitterIcon className="icon" />
                 </IconButton>
               </Stack>
